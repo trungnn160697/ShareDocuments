@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manager/layout :: head">
+</head>
+<body>
+	<!-- Navbar-->
+    <header class="app-header" th:replace="manager/layout :: header">
+    </header>
+    
+    <!-- Sidebar menu-->
+    <div th:replace="manager/layout :: sidebar">
+    </div>
+    <div class="app-content">
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-th-list"></i> Quản lí người dùng</h1>
+
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+          <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
+          <li class="breadcrumb-item"><a href="/user">Quản lí nhân viên</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <table class="table table-hover table-bordered" id="tableUser">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Họ và tên</th>
+                    <th>Ảnh đại diện</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Chức vụ</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>	
+  
+ 
+  <script type="text/javascript" th:src="@{/js/manager/user.js}"></script>
+</body>
+</html>

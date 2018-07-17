@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Đăng nhập</title>
+
+<!--css-->
+<link th:href="@{/css/login.css}"  rel="stylesheet">
+
+<!--js -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/login.js}"></script>
+<script type="text/javascript" th:src="@{/js/sweetalert.min.js}"></script>
+</head>
+<body>
+<div class="login-page">
+  <div class="form">
+  	<div class="register-form" id="register-form">
+	  	<h2>ĐĂNG KÍ THÀNH VIÊN</h2>
+	    <form  id="form-register" enctype="multipart/form-data">
+	      <input type="text" placeholder="Tên đăng nhập" id="username" name="username"/>
+	      <input type="password" placeholder="Mật khẩu" id="password" name="password"/>
+	      <input type="text" placeholder="Họ và tên" id="fullName" name="fullName"/>
+	      <input type="text" placeholder="Email" id="email" name="email"/>
+	      <input type="text" placeholder="Số điện thoại" id="phone" name="phone"/>
+	      <input type="file"  id="image" name="image">
+	      <button id="submit-register" type="button">Tạo tài khoản</button>
+	      <p class="message">Đã có tài khoản <a class="login">Đăng nhập</a></p>
+	    
+	    </form>
+    </div>
+    <div id="form-login">
+	    <h2>ĐĂNG NHẬP HỆ THỐNG</h2>
+	    <p th:if="${param.error}" class="error">Nhập sai tài khoản hoặc mật khẩu</p>
+	    <form class="login-form" th:action="@{/login}" method="post">
+	      <input type="text" placeholder="Tên đăng nhập" name="username"/>
+	      <input type="password" placeholder="Mật khẩu" name="password"/>
+	      <button type="submit">Đăng nhập</button>
+		  <p id="forgot-password"><a  class="message" id="forgot">Quên mật khẩu</a></p>
+	      <p class="message">Chưa có tài khoản? <a id="register">Tạo tài khoản</a></p>
+	    </form>
+    </div>
+     <div class="form-forgot-password" id="form-forgot-password">
+	    <h2>QUÊN MẬT KHẨU</h2>
+	    <form class="forgot-password-form">
+	      <input type="text" placeholder="Nhập email" name="email" id="email-forgot"/>
+	      <button id="submit-forgot" type="button">Lấy lại mật khẩu</button>
+	      <p class="message">Đã có tài khoản <a class="login">Đăng nhập</a></p>
+	    </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

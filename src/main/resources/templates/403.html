@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+    <title>Không thể truy cập</title>
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- animation CSS -->
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <!-- color CSS -->
+    <link th:href="@{/css/colors/default.css}" id="theme" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <section id="wrapper" class="error-page">
+        <div class="error-box">
+            <div class="error-body text-center">
+                <h1 class="text-danger">403</h1>
+                <h3 class="text-uppercase">Bạn không có quyền truy cập trang này</h3>
+                <a th:href="@{/}" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40">Trở về trang quản lí</a> </div>
+            <footer class="footer text-center">2017 © Gatrongtapbay.</footer>
+        </div>
+    </section>
+    <!-- jQuery -->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

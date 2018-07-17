@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manager/layout :: head">
+</head>
+<body>
+	<!-- Navbar-->
+    <header class="app-header" th:replace="manager/layout :: header">
+    </header>
+    
+    <!-- Sidebar menu-->
+    <div th:replace="manager/layout :: sidebar">
+    </div>
+    
+   <div class="app-content">
+   	  <input type="hidden" id="id_user_login" th:value="${session.userLogin.userDto.id}">
+      <div class="row user">
+        <div class="col-md-12">
+          <div class="profile"> 
+            <div class="info"><img class="user-img" id="user_image" th:src="@{'http://localhost:8888/display?'+${session.userLogin.userDto.image}}">
+              <h4 th:text="${session.userLogin.userDto.fullName}"></h4>
+            </div>
+            <div class="cover-image"></div>
+          </div>
+        </div>
+         <div class="col-md-3">
+          <div class="tile p-0">
+            <ul class="nav flex-column nav-tabs user-tabs">
+              <li class="nav-item"><a class="nav-link active" href="#user_info" data-toggle="tab" id="tab_user_info">Thông tin cá nhân</a></li>
+              <li class="nav-item"><a class="nav-link " href="#user_change_passsword" data-toggle="tab" id="tab_change_password">Đổi mật khẩu</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="tab-content">
+            <div class="tab-pane fade" id="user_change_passsword">
+              	<div class="tile user-settings">
+                <h4 class="line-head">Đổi mật khẩu</h4>
+                <form>
+                  <div class="row">
+                    <div class="col-md-8 mb-4">
+                      <label>Mật khẩu hiện tại</label>
+                      <input class="form-control" type="password" id="current_password">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-8 mb-4">
+                      <label>Mật khẩu mới</label>
+                      <input class="form-control" type="password" id="new_password">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-8 mb-4">
+                      <label>Nhập lại mật khẩu</label>
+                      <input class="form-control" type="password" id="confirm_new_password">
+                    </div>
+                  </div>
+                  <div class="row mb-10">
+                    <div class="col-md-12">
+                      <button class="btn btn-primary" type="button" id="button_change_password"><i class="fa fa-fw fa-lg fa-check-circle"></i>Thay đổi mật khẩu</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="tab-pane active" id="user_info">
+              <div class="tile user-settings">
+                <h4 class="line-head">Thông tin cá nhân</h4>
+                <form>
+                  <div class="row">
+                    <div class="col-md-8 mb-4">
+                      <label>Họ và tên</label>
+                      <input class="form-control" type="text" id="fullName" th:value="${session.userLogin.userDto.fullName}">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-8 mb-4">
+                      <label>Email</label>
+                      <input class="form-control" type="text" id="email" th:value="${session.userLogin.userDto.email}">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-8 mb-4">
+                      <label>Số điện thoại</label>
+                      <input class="form-control" type="text" id="phone" th:value="${session.userLogin.userDto.phone}">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-8 mb-4">
+                      <label>Ảnh đại diện</label>
+                      <input class="form-control" type="file" id="image">
+                    </div>
+                  </div>
+                  <div class="row mb-10">
+                    <div class="col-md-12">
+                      <button class="btn btn-primary" type="button" id="button_update_info_user"><i class="fa fa-fw fa-lg fa-check-circle"></i>Cập nhật thông tin</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+         
+      </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/manager/info-user.js}"></script>
+</body>
+</html>
