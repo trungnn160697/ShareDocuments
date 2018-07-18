@@ -82,7 +82,7 @@ public class UserService implements UserDetailsService {
 	public void createFormRequest(String username, String password, String fullName, String email, String phone,
 			MultipartFile file) {
 		UserRequest userRequest = new UserRequest(username, Encode.encode(password), fullName, email, phone,
-				UploadUtil.upload(file));
+				UploadUtil.upload(file, Constants.URL_IMAGE_USER, "image"));
 		User user = userMapper.toEntity(userRequest);
 		List<UserRole> userRoles = new ArrayList<>();
 		userRoles.add(userRoleService.findById(3));
@@ -98,7 +98,7 @@ public class UserService implements UserDetailsService {
 		user.setEmail(email);
 		user.setPhone(phone);
 		if (file != null) {
-			user.setImage(UploadUtil.upload(file));
+			user.setImage(UploadUtil.upload(file, Constants.URL_IMAGE_USER, "image"));
 		} else {
 			user.setImage(userLogin.getUserDto().getImage());
 		}
@@ -126,7 +126,7 @@ public class UserService implements UserDetailsService {
 		user.setDeleted(true);
 		userRepository.save(user);
 	}
-	
+
 	public void upgrade(Integer id) {
 		User user = userRepository.findById(id).get();
 		List<UserRole> roles = new ArrayList<>();
@@ -180,6 +180,10 @@ public class UserService implements UserDetailsService {
 		}
 		userResponse.setUserDtos(userDtos);
 		return userResponse;
+	}
+
+	public User findById(Integer id) {
+		return userRepository.findByIdAndDeleted(id, false);
 	}
 
 }

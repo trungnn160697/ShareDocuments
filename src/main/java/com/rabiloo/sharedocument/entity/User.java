@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -45,6 +46,9 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "user_userrole", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<UserRole> userRoles;
+
+	@OneToMany(mappedBy = "user")
+	private List<Document> listDocument;
 
 	public User() {
 		super();
@@ -157,6 +161,14 @@ public class User {
 
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public List<Document> getListDocument() {
+		return listDocument;
+	}
+
+	public void setListDocument(List<Document> listDocument) {
+		this.listDocument = listDocument;
 	}
 
 	@Override

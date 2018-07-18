@@ -9,13 +9,13 @@ import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
 
 public class UploadUtil {
-	public static String upload(MultipartFile file) {
+	public static String upload(MultipartFile file, String url, String type) {
 		String image = "";
 		if (!file.getOriginalFilename().isEmpty()) {
 			try {
 				BufferedOutputStream outputStream = new BufferedOutputStream(
-						new FileOutputStream(new File(Constants.URL_IMAGE_USER, file.getOriginalFilename())));
-				image = "image=" + file.getOriginalFilename();
+						new FileOutputStream(new File(url, file.getOriginalFilename())));
+				image = type + "=" + file.getOriginalFilename();
 				outputStream.write(file.getBytes());
 				outputStream.flush();
 				outputStream.close();

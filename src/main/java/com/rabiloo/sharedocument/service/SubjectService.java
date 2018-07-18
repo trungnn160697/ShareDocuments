@@ -23,10 +23,26 @@ import com.rabiloo.sharedocument.util.Constants;
 @Service
 @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 public class SubjectService {
+
 	@Autowired
 	private SubjectMapper subjectMapper;
 	@Autowired
 	private SubjectReposiotory subjectRepository;
+
+	public SubjectResponse findAll() {
+		SubjectResponse subjectResponse = new SubjectResponse();
+		List<SubjectDto> subjectDtos = new ArrayList<>();
+		List<Subject> listSubject = subjectRepository.findByDeleted(false);
+		if (listSubject != null) {
+			if (!CollectionUtils.isEmpty(listSubject)) {
+				subjectDtos = listSubject.parallelStream().map(subject -> subjectMapper.toDto(subject))
+						.collect(Collectors.toList());
+			}
+		}
+		subjectResponse.setSubjectDtos(subjectDtos);
+		return subjectResponse;
+
+	}
 
 	public SubjectResponse findByDeletedAndNameContaining(Boolean deleted, String name, Integer page) {
 		SubjectResponse subjectResponse = new SubjectResponse();
@@ -89,6 +105,9 @@ public class SubjectService {
 			subjectRepository.save(subject);
 		}
 
+	}
+	public Subject findById(Integer id) {
+		return subjectRepository.findByIdAndDeleted(id, false);
 	}
 
 }

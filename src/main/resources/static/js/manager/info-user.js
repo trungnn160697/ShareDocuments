@@ -61,10 +61,7 @@ $(document).ready(function(){
 		formData.append("fullName",$("#fullName").val());
 		formData.append("email",$("#email").val());
 		formData.append("phone",$("#phone").val());
-		if(document.getElementById("image").files[0]!=null){
-			formData.append("image",document.getElementById("image").files[0]);
-		}
-
+		formData.append("image",document.getElementById("image").files[0]);
 		$.ajax({
 			type : 'POST',
 			url : "/change-info",

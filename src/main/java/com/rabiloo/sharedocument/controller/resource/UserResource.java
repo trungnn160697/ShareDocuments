@@ -106,7 +106,8 @@ public class UserResource {
 	@ResponseBody
 	public ResponseEntity<UserResponse> changeInfo(@RequestParam("id") Integer id,
 			@RequestParam("fullName") String fullName, @RequestParam("email") String email,
-			@RequestParam("phone") String phone, @RequestParam("image") MultipartFile file, HttpSession session) {
+			@RequestParam("phone") String phone, @RequestParam(name = "image", required = false) MultipartFile file,
+			HttpSession session) {
 		UserResponse userLogin = (UserResponse) session.getAttribute("userLogin");
 		UserDto userDto = userLogin.getUserDto();
 		if (!UserValidation.validateForm(fullName, email, phone)) {
@@ -152,15 +153,15 @@ public class UserResource {
 		userResponse.setiTotalRecords(userService.countByDeletedAndFullNameContaining(false, search));
 		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/user/delete")
-	public ResponseEntity<UserResponse> delete(@RequestParam("id") Integer id){
+	public ResponseEntity<UserResponse> delete(@RequestParam("id") Integer id) {
 		userService.delete(id);
 		return new ResponseEntity<UserResponse>(HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/user/upgrade")
-	public ResponseEntity<UserResponse> upgrade(@RequestParam("id") Integer id){
+	public ResponseEntity<UserResponse> upgrade(@RequestParam("id") Integer id) {
 		userService.upgrade(id);
 		return new ResponseEntity<UserResponse>(HttpStatus.OK);
 	}

@@ -1,5 +1,7 @@
 package com.rabiloo.sharedocument.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +12,8 @@ public interface SubjectReposiotory extends JpaRepository<Subject, Integer> {
 	Page<Subject> findByDeletedAndNameContaining(Boolean deleted, String name, Pageable pageable);
 
 	Long countByDeletedAndNameContaining(Boolean deleted, String name);
-	
-	Subject findByIdAndDeleted(Integer id,Boolean deleted);
+
+	Subject findByIdAndDeleted(Integer id, Boolean deleted);
+
+	List<Subject> findByDeleted(Boolean deleted);
 }

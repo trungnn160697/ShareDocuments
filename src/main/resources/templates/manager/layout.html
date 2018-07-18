@@ -27,6 +27,8 @@
     <!--dataTables  -->
     <script th:src="@{/js/manager/plugins/jquery.dataTables.min.js}"></script>
 	<script th:src="@{/js/manager/plugins/dataTables.bootstrap.min.js}"></script>
+	<!--ckeditor -->
+	<script th:src="@{/ckeditor/ckeditor.js}"></script>
     
   </head>
   <body class="app sidebar-mini rtl">
@@ -50,7 +52,7 @@
 	        <li><a class="app-menu__item" href="/info-user"><i class="app-menu__icon fa fa-user fa-lg"></i><span class="app-menu__label">Thông tin cá nhân</span></a></li>
 	        <li class="treeview"><a class="app-menu__item" href="/user" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Quản lí người dùng</span></a></li>
 	        <li><a class="app-menu__item" href="/subject"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Quản lí môn học</span></a></li>
-	        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i class="treeview-indicator fa fa-angle-right"></i></a> </li>
+	        <li class="treeview"><a class="app-menu__item" href="/document" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Quản lí tài liệu</span></a> </li>
 	        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 	          <ul class="treeview-menu">
 	            <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic Tables</a></li>

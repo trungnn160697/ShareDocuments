@@ -1,10 +1,13 @@
 package com.rabiloo.sharedocument.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +30,9 @@ public class Subject {
 
 	@Column(name = "deleted")
 	private Boolean deleted;
+
+	@OneToMany(mappedBy = "subject")
+	private List<Document> listDocument;
 
 	public Subject() {
 		super();
@@ -86,6 +92,14 @@ public class Subject {
 
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public List<Document> getListDocument() {
+		return listDocument;
+	}
+
+	public void setListDocument(List<Document> listDocument) {
+		this.listDocument = listDocument;
 	}
 
 }
