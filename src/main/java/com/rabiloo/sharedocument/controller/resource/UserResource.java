@@ -6,7 +6,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -154,8 +156,8 @@ public class UserResource {
 		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 	}
 
-	@PostMapping("/user/delete")
-	public ResponseEntity<UserResponse> delete(@RequestParam("id") Integer id) {
+	@DeleteMapping("/user/delete/{id}")
+	public ResponseEntity<UserResponse> delete(@PathVariable("id") Integer id) {
 		userService.delete(id);
 		return new ResponseEntity<UserResponse>(HttpStatus.OK);
 	}

@@ -28,8 +28,7 @@ $(document).ready(function(){
 	});
 	
 	 $('#tableDocument').on("click",'.btn-delete',function(){
-		  var formData = new FormData();
-		  formData.append("id",$(this).attr('id'));
+		  var id = $(this).attr('id');
 		  swal({
 			  title: "Bạn chắc chắn muốn xóa",
 			  icon: "warning",
@@ -39,14 +38,13 @@ $(document).ready(function(){
 			.then((willDelete) => {
 			  if (willDelete) {
 			    $.ajax({
-			    	type:"Post",
+			    	type:"DELETE",
 			    	processData : false,
 					contentType : false,
-			    	url:"/user/delete",
-			    	data:formData,
+			    	url:"/document/delete/"+id,
 			    	success: function(){ 
-                       $('#tableUser').DataTable().ajax.reload(); 
-                       swal("Đã xóa!", "Trở lại trang quản lí nhân viên", "success"); 
+                       $('#tableDocument').DataTable().ajax.reload(); 
+                       swal("Đã xóa!", "Trở lại trang quản lí tài liệu", "success"); 
                    },
                    error: function(){
                        swal("Error", "Could not be deleted! :)", "error");   

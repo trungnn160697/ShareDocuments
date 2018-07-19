@@ -87,4 +87,15 @@ public class DocumentService {
 		documentRequest.setIdUser(userLogin.getUserDto().getId());
 		return documentRequest;
 	}
+
+	public void delete(Integer id) {
+		Document document = findOne(id);
+		if (document != null) {
+			document.setDeleted(true);
+		}
+	}
+
+	public Document findOne(Integer id) {
+		return documentRepository.findById(id).get();
+	}
 }

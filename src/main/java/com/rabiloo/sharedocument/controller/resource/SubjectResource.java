@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,8 +44,8 @@ public class SubjectResource {
 		return new ResponseEntity<SubjectResponse>(subjectResponse, HttpStatus.OK);
 	}
 
-	@PostMapping("/subject/delete")
-	public ResponseEntity<SubjectResource> delete(@RequestParam("id") Integer id) {
+	@DeleteMapping("/subject/delete/{id}")
+	public ResponseEntity<SubjectResource> delete(@PathVariable("id") Integer id) {
 		subjectService.delete(id);
 		return new ResponseEntity<SubjectResource>(HttpStatus.OK);
 	}

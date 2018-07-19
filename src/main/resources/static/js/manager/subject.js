@@ -24,8 +24,7 @@ $(document).ready(function(){
 	});
 	
 	 $('#tableSubject').on("click",'.btn-delete',function(){
-		  var formData = new FormData();
-		  formData.append("id",$(this).attr('id'));
+		  var id = $(this).attr('id');
 		  swal({
 			  title: "Bạn chắc chắn muốn xóa",
 			  icon: "warning",
@@ -35,11 +34,10 @@ $(document).ready(function(){
 			.then((willDelete) => {
 			  if (willDelete) {
 			    $.ajax({
-			    	type:"Post",
+			    	type:"DELETE",
 			    	processData : false,
 					contentType : false,
-			    	url:"/subject/delete",
-			    	data:formData,
+			    	url:"/subject/delete/"+id,
 			    	success: function(){ 
                        $('#tableSubject').DataTable().ajax.reload(); 
                        swal("Đã xóa!", "Trở lại trang quản lí môn học", "success"); 

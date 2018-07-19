@@ -38,8 +38,7 @@ $(document).ready(function(){
 	});
 	
 	 $('#tableUser').on("click",'.btn-delete',function(){
-		  var formData = new FormData();
-		  formData.append("id",$(this).attr('id'));
+		  var id = $(this).attr('id');
 		  swal({
 			  title: "Bạn chắc chắn muốn xóa",
 			  icon: "warning",
@@ -49,11 +48,10 @@ $(document).ready(function(){
 			.then((willDelete) => {
 			  if (willDelete) {
 			    $.ajax({
-			    	type:"Post",
+			    	type:"DELETE",
 			    	processData : false,
 					contentType : false,
-			    	url:"/user/delete",
-			    	data:formData,
+			    	url:"/user/delete/"+id,
 			    	success: function(){ 
                        $('#tableUser').DataTable().ajax.reload(); 
                        swal("Đã xóa!", "Trở lại trang quản lí nhân viên", "success"); 

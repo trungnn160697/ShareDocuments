@@ -32,17 +32,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.authorizeRequests()
-				.antMatchers("/").hasRole("EMPLOYEE")
-				.antMatchers("/info-user").hasRole("ADMIN")
-				.antMatchers("/info-user").hasRole("CUSTOMER")
-				.antMatchers("/info-user").hasRole("EMPLOYEE")
-				.antMatchers("/user").hasRole("ADMIN")
-				.antMatchers("/subject").hasRole("ADMIN")
-				.antMatchers("/document").hasRole("EMPLOYEE")
+			.antMatchers("/").hasRole("EMPLOYEE")
+			.antMatchers("/info-user").hasRole("ADMIN")
+			.antMatchers("/info-user").hasRole("CUSTOMER")
+			.antMatchers("/info-user").hasRole("EMPLOYEE")
+			.antMatchers("/user").hasRole("ADMIN")
+			.antMatchers("/subject").hasRole("ADMIN")
+			.antMatchers("/document").hasRole("EMPLOYEE")
 			.and()
-				.formLogin().loginPage("/login")
-				.usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/")
-				.failureUrl("/login?error").and().exceptionHandling().accessDeniedPage("/403");
+			.formLogin().loginPage("/login").usernameParameter("username")
+				.passwordParameter("password").defaultSuccessUrl("/")
+				.failureUrl("/login?error").and()
+				.exceptionHandling().accessDeniedPage("/403");
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 	}
