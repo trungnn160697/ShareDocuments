@@ -29,4 +29,25 @@ public class UploadUtil {
 		}
 		return image;
 	}
+	
+	public static String upload(MultipartFile file, String url) {
+		String document = "";
+		if (!file.getOriginalFilename().isEmpty()) {
+			try {
+				BufferedOutputStream outputStream = new BufferedOutputStream(
+						new FileOutputStream(new File(url, file.getOriginalFilename())));
+				document = file.getOriginalFilename();
+				outputStream.write(file.getBytes());
+				outputStream.flush();
+				outputStream.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return document;
+	}
 }

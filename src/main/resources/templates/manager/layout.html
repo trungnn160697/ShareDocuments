@@ -11,6 +11,7 @@
     <!-- <link rel="stylesheet" type="text/css" th:href="@{/css/manager/jquery.dataTables.css}"> -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/manager/subject.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/manager/info-user.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/manager/document.css}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <!-- Essential javascripts for application to work-->
@@ -29,6 +30,7 @@
 	<script th:src="@{/js/manager/plugins/dataTables.bootstrap.min.js}"></script>
 	<!--ckeditor -->
 	<script th:src="@{/ckeditor/ckeditor.js}"></script>
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     
   </head>
   <body class="app sidebar-mini rtl">
@@ -53,7 +55,7 @@
 	        <li class="treeview"><a class="app-menu__item" href="/user" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Quản lí người dùng</span></a></li>
 	        <li><a class="app-menu__item" href="/subject"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Quản lí môn học</span></a></li>
 	        <li class="treeview"><a class="app-menu__item" href="/document" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Quản lí tài liệu</span></a> </li>
-	        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+	        <li class="treeview"><a class="app-menu__item" href="/exam" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Quản lí đề thi</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 	          <ul class="treeview-menu">
 	            <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic Tables</a></li>
 	            <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data Tables</a></li>

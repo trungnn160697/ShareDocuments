@@ -9,5 +9,6 @@ public class Constants {
 	public static final String MY_PASSWORD = "nguyenngoctrung";
 	public static final String URL_DOCUMENT = "E:\\ShareDocuments\\src\\main\\resources\\static\\document\\";
 	public static final String URL_IMAGE_DOCUMENT = "E:\\ShareDocuments\\src\\main\\resources\\static\\images\\document\\";
+	public static final String URL_IMAGE_QUESTION = "E:\\ShareDocuments\\src\\main\\resources\\static\\images\\question\\";
 	public static Integer pageSize;
 }

@@ -67,7 +67,7 @@ $(document).ready(function(){
 	 
 	 $('#tableUser').on("click",'.btn-upgrade',function(){
 		  var formData = new FormData();
-		  formData.append("id",$(this).attr('id'));
+		  var id = $(this).attr('id');
 		  swal({
 			  title: "Bạn chắc chắn muốn nâng cấp",
 			  icon: "warning",
@@ -77,11 +77,10 @@ $(document).ready(function(){
 			.then((willDelete) => {
 			  if (willDelete) {
 			    $.ajax({
-			    	type:"Post",
+			    	type:"PUT",
 			    	processData : false,
 					contentType : false,
-			    	url:"/user/upgrade",
-			    	data:formData,
+			    	url:"/user/upgrade/"+id,
 			    	success: function(){ 
                       $('#tableUser').DataTable().ajax.reload(); 
                       swal("Đã nâng cấp!", "Trở lại trang quản lí nhân viên", "success"); 

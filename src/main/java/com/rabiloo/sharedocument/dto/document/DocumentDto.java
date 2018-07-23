@@ -12,13 +12,15 @@ public class DocumentDto {
 	private String document;
 	private String usernameUser;
 	private Integer idUser;
+	private Integer subjectId;
 
 	public DocumentDto() {
 		super();
 	}
 
 	public DocumentDto(Integer id, String name, String description, String image, Double rate, String date,
-			String nameOfSubject, Integer numberOfDownload, String document, String usernameUser, Integer idUser) {
+			String nameOfSubject, Integer numberOfDownload, String document, String usernameUser, Integer idUser,
+			Integer subjectId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,6 +33,7 @@ public class DocumentDto {
 		this.document = document;
 		this.usernameUser = usernameUser;
 		this.idUser = idUser;
+		this.subjectId = subjectId;
 	}
 
 	public Integer getId() {
@@ -119,6 +122,14 @@ public class DocumentDto {
 
 	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
+	}
+
+	public Integer getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(Integer subjectId) {
+		this.subjectId = subjectId;
 	}
 
 }

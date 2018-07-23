@@ -16,6 +16,7 @@ public class DocumentMapper {
 	public DocumentDto toDto(Document document) {
 		return new DocumentDto(document.getId(), document.getName(), document.getDescription(), document.getImage(),
 				document.getRate(), document.getDate(), document.getSubject().getName(), document.getNumberOfDownload(),
-				document.getLinkDocument(), document.getUser().getUsername(), document.getId());
+				document.getLinkDocument(), document.getUser().getUsername(), document.getUser().getId(),
+				document.getSubject().getId());
 	}
 }

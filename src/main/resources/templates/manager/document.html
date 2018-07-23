@@ -18,12 +18,12 @@
         </div>
         <ul class="app-breadcrumb breadcrumb side">
           <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
-          <li class="breadcrumb-item"><a href="/user">Quản lí tài liệu</a></li>
+          <li class="breadcrumb-item"><a href="/document">Quản lí tài liệu</a></li>
         </ul>
       </div>
       <div class="row">
         <div class="col-md-12">
-          <a class="btn btn-primary button_add_subject" data-toggle="modal" href='#modal_id_add' >Thêm mới</a>
+          <a class="btn btn-primary button_add_subject" data-toggle="modal" href='#modal_id_add_document' >Thêm mới</a>
           <div class="tile">
             <div class="tile-body">
               <table class="table table-hover table-bordered" id="tableDocument">
@@ -49,7 +49,7 @@
       </div>
     </div>	
   
- <div class="modal fade" id="modal_id_add">
+ <div class="modal fade" id="modal_id_add_document">
 	   	<div class="modal-dialog">
 	   		<div class="modal-content">
 	   			<div class="modal-header">
@@ -86,10 +86,54 @@
 	   		</div>
 	   	</div>
    	</div>
+   	
+   	<div class="modal fade" id="modal_id_view_document">
+	   	<div class="modal-dialog">
+	   		<div class="modal-content">
+	   			<div class="modal-header">
+	   				 <h2>Thông tin tài liệu</h2>
+	   				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	   			</div>
+	   			<div class="modal-body">
+					<table id="table_view_document">
+		                <tbody>
+		                  <tr>  
+		                    <th>Tên tài liệu:</th>
+		                    <td id="view_name_document"></td>
+		                  </tr>
+		                   <tr>
+		                    <th>Môn học:</th>
+		                    <td id="view_name_subject"></td>
+		                  </tr>
+		                   <tr>
+		                    <th >Mô tả:</th>
+		                    <td id="view_description_document"></td>
+		                  </tr>
+		                   <tr>
+		                    <th >Người đăng:</th>
+		                    <td id="view_username" class="view-username"></td>
+		                  </tr>
+		                   <tr>
+		                    <th>Đánh giá:</th>
+		                    <td id="view_rate"></td>
+		                  </tr>
+		                   <tr>
+		                    <th>Số lượt tải:</th>
+		                    <td id="view_number_of_download"></td>
+		                  </tr>
+		                   <tr>
+		                   	<th></th>
+		                    <td id="row_button_download"></td>
+		                  </tr>
+		                </tbody>
+              		</table>
+	   			</div>
+	   		</div>
+	   	</div>
+   	</div>
   <script type="text/javascript" th:src="@{/js/manager/document.js}"></script>
-  <!--  <script>
- 		CKEDITOR.replace( 'add_description' );
-   </script>     -->
+
+ 
 	 
 </body>
 

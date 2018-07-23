@@ -20,6 +20,8 @@ import com.rabiloo.sharedocument.dto.document.DocumentRequest;
 import com.rabiloo.sharedocument.dto.document.DocumentResponse;
 import com.rabiloo.sharedocument.dto.user.UserResponse;
 import com.rabiloo.sharedocument.entity.Document;
+import com.rabiloo.sharedocument.entity.Subject;
+import com.rabiloo.sharedocument.entity.User;
 import com.rabiloo.sharedocument.mapper.DocumentMapper;
 import com.rabiloo.sharedocument.repository.DocumentRepository;
 import com.rabiloo.sharedocument.util.Constants;
@@ -66,6 +68,8 @@ public class DocumentService {
 		DocumentRequest documentRequest = createFormRequest(name, subjectId, description, image, linkDocument);
 		Document document = documentMapper.toEntity(documentRequest);
 		document.setDeleted(false);
+		document.setRate(0.0);
+		document.setNumberOfDownload(0);
 		document.setSubject(subjectService.findById(documentRequest.getSubjectId()));
 		document.setUser(userService.findById(documentRequest.getIdUser()));
 		documentRepository.save(document);
@@ -82,8 +86,7 @@ public class DocumentService {
 			urlImage = UploadUtil.upload(image, Constants.URL_IMAGE_DOCUMENT, "image");
 		}
 		DocumentRequest documentRequest = new DocumentRequest(name, description, urlImage,
-				Format.formatDate(new Date()), subjectId,
-				UploadUtil.upload(document, Constants.URL_DOCUMENT, "document"));
+				Format.formatDate(new Date()), subjectId, UploadUtil.upload(document, Constants.URL_DOCUMENT));
 		documentRequest.setIdUser(userLogin.getUserDto().getId());
 		return documentRequest;
 	}
@@ -97,5 +100,58 @@ public class DocumentService {
 
 	public Document findOne(Integer id) {
 		return documentRepository.findById(id).get();
+	}
+
+	public DocumentResponse getDocument(Integer id) {
+		Document document = findOne(id);
+		DocumentResponse documentResponse = new DocumentResponse();
+		documentResponse.setDocumentDto(documentMapper.toDto(document));
+		return documentResponse;
+	}
+
+	public Document update(Document document) {
+		return documentRepository.save(document);
+	}
+
+	public DocumentResponse findByName(String name, User user, Integer page) {
+		@SuppressWarnings("deprecation")
+		PageRequest pageRequest = new PageRequest(page, Constants.pageSize);
+		List<Document> listDocument = documentRepository
+				.findByDeletedAndUserAndNameContaining(false, user, name, pageRequest).getContent();
+		List<DocumentDto> documentDtos = new ArrayList<>();
+		if (listDocument != null) {
+			if (!CollectionUtils.isEmpty(listDocument)) {
+				documentDtos = listDocument.parallelStream().map(document -> documentMapper.toDto(document))
+						.collect(Collectors.toList());
+			}
+		}
+		DocumentResponse documentResponse = new DocumentResponse();
+		documentResponse.setDocumentDtos(documentDtos);
+		return documentResponse;
+	}
+
+	public Long countByName(String name, User user) {
+		return documentRepository.countByDeletedAndUserAndNameContaining(false, user, name);
+	}
+
+	public DocumentResponse findByName(String name, Subject subject, Integer page) {
+		@SuppressWarnings("deprecation")
+		PageRequest pageRequest = new PageRequest(page, Constants.pageSize);
+		List<Document> listDocument = documentRepository
+				.findByDeletedAndSubjectAndNameContaining(false, subject, name, pageRequest).getContent();
+		List<DocumentDto> documentDtos = new ArrayList<>();
+		if (listDocument != null) {
+			if (!CollectionUtils.isEmpty(listDocument)) {
+				documentDtos = listDocument.parallelStream().map(document -> documentMapper.toDto(document))
+						.collect(Collectors.toList());
+			}
+		}
+		DocumentResponse documentResponse = new DocumentResponse();
+		documentResponse.setDocumentDtos(documentDtos);
+		return documentResponse;
+	}
+
+	public Long countByName(String name, Subject subject) {
+		return documentRepository.countByDeletedAndSubjectAndNameContaining(false, subject, name);
 	}
 }

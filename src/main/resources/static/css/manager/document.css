@@ -1,0 +1,33 @@
+/* .modal_id_add_document{
+	height:1000px;
+}
+#add_description{
+	height:1000px;
+} */
+#table_view_document tr th{
+	width:30%;
+	
+}
+#table_view_document tr td{
+	margin-left:20px;
+}
+#table_view_document tr{
+	height:30px;
+	font-size:18px
+}
+
+#row_button_download{
+	float:right;
+
+}
+.view-username{
+	width:70%;
+}
+ a{
+	color:black;
+	
+}
+a:hover{
+	text-decoration: none;
+	color:#009688;
+}

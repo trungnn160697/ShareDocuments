@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manager/layout :: head">
+</head>
+<body>
+	<!-- Navbar-->
+    <header class="app-header" th:replace="manager/layout :: header">
+    </header>
+    
+    <!-- Sidebar menu-->
+    <div th:replace="manager/layout :: sidebar">
+    </div>
+    <div class="app-content" style="height:1000px">
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-th-list"></i> Quản lí tài liệu môn <span th:text="${subject.name}"></span></h1>
+
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+          <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
+          <li class="breadcrumb-item"><a href="/document">Quản lí tài liệu</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <table class="table table-hover table-bordered" id="tableDocumentSubject">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Tài liệu</th>
+                    <th>Người đăng</th>
+                    <th>Ngày đăng</th>
+                    <th>Lượt tải</th>
+                    <th>Đánh giá</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>	
+   	
+   	<div class="modal fade" id="modal_id_view_document">
+	   	<div class="modal-dialog">
+	   		<div class="modal-content">
+	   			<div class="modal-header">
+	   				 <h2>Thông tin tài liệu</h2>
+	   				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	   			</div>
+	   			<div class="modal-body">
+					<table id="table_view_document">
+		                <tbody>
+		                  <tr>  
+		                    <th>Tên tài liệu:</th>
+		                    <td id="view_name_document"></td>
+		                  </tr>
+		                   <tr>
+		                    <th>Môn học:</th>
+		                    <td id="view_name_subject"></td>
+		                  </tr>
+		                   <tr>
+		                    <th >Mô tả:</th>
+		                    <td id="view_description_document"></td>
+		                  </tr>
+		                   <tr>
+		                    <th >Người đăng:</th>
+		                    <td id="view_username" class="view-username"></td>
+		                  </tr>
+		                   <tr>
+		                    <th>Đánh giá:</th>
+		                    <td id="view_rate"></td>
+		                  </tr>
+		                   <tr>
+		                    <th>Số lượt tải:</th>
+		                    <td id="view_number_of_download"></td>
+		                  </tr>
+		                   <tr>
+		                   	<th></th>
+		                    <td id="row_button_download"></td>
+		                  </tr>
+		                </tbody>
+              		</table>
+	   			</div>
+	   		</div>
+	   	</div>
+   	</div>
+  <script type="text/javascript" th:src="@{/js/manager/document.js}"></script>
+
+ 
+	 
+</body>
+
+</html>

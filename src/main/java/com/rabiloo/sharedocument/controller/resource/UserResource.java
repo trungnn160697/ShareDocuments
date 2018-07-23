@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -81,7 +81,7 @@ public class UserResource {
 		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 	}
 
-	@PostMapping("/change-password")
+	@PostMapping(value="/change-password")
 	public ResponseEntity<UserResponse> changePassword(@RequestParam("id") Integer id,
 			@RequestParam("currentPassword") String currentPassword, @RequestParam("newPassword") String newPassword,
 			@RequestParam("confirmNewPassword") String confirmNewPassword, HttpSession session) {
@@ -105,7 +105,6 @@ public class UserResource {
 	}
 
 	@PostMapping("/change-info")
-	@ResponseBody
 	public ResponseEntity<UserResponse> changeInfo(@RequestParam("id") Integer id,
 			@RequestParam("fullName") String fullName, @RequestParam("email") String email,
 			@RequestParam("phone") String phone, @RequestParam(name = "image", required = false) MultipartFile file,
@@ -162,8 +161,8 @@ public class UserResource {
 		return new ResponseEntity<UserResponse>(HttpStatus.OK);
 	}
 
-	@PostMapping("/user/upgrade")
-	public ResponseEntity<UserResponse> upgrade(@RequestParam("id") Integer id) {
+	@PutMapping("/user/upgrade/{id}")
+	public ResponseEntity<UserResponse> upgrade(@PathVariable("id") Integer id) {
 		userService.upgrade(id);
 		return new ResponseEntity<UserResponse>(HttpStatus.OK);
 	}

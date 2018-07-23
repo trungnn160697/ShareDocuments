@@ -19,12 +19,12 @@ $(document).ready(function(){
 	
 	$("#button_change_password").click(function(){
 		var formData = new FormData();
-		formData.append("id",$("#id-user-login").val());
+		formData.append("id", $("#id_user_login").val());
 		formData.append("currentPassword",$("#current_password").val());
 		formData.append("newPassword",$("#new_password").val());
 		formData.append("confirmNewPassword",$("#confirm_new_password").val());
 		$.ajax({
-			type : 'POST',
+			type : "post",
 			url : "/change-password",
 			data : formData,
 			processData : false,
@@ -63,7 +63,7 @@ $(document).ready(function(){
 		formData.append("phone",$("#phone").val());
 		formData.append("image",document.getElementById("image").files[0]);
 		$.ajax({
-			type : 'POST',
+			type : 'post',
 			url : "/change-info",
 			data : formData,
 			processData : false,

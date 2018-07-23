@@ -109,5 +109,7 @@ public class SubjectService {
 	public Subject findById(Integer id) {
 		return subjectRepository.findByIdAndDeleted(id, false);
 	}
+	
+
 
 }
