@@ -10,5 +10,7 @@ public interface ExamRepository extends JpaRepository<Exam, Integer> {
 	Page<Exam> findByDeletedAndNameContaining(Boolean deleted,String name,Pageable pageable);
 
 	Long countByDeletedAndNameContaining(Boolean deleted,String name);
+	
+	Long countByDeleted(Boolean deleted);
 
 }

@@ -68,7 +68,7 @@ public class DocumentResource {
 			@RequestParam("idSubject") Integer subjectId, @RequestParam("description") String description,
 			@RequestParam(name = "image", required = false) MultipartFile image,
 			@RequestParam(name = "linkDocument", required = false) MultipartFile linkDocument) {
-		if (!DocumentValidator.validateForm(name, subjectId, description)) {
+		if (!DocumentValidator.validateForm(name, subjectId, description,linkDocument)) {
 			DocumentResponse documentResponse = new DocumentResponse();
 			documentResponse.setMessage(new MessageUtil("Không được bỏ trống thông tin"));
 			return new ResponseEntity<DocumentResponse>(documentResponse, HttpStatus.OK);

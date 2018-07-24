@@ -19,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.rabiloo.sharedocument.service.DocumentService;
+import com.rabiloo.sharedocument.service.ExamService;
 import com.rabiloo.sharedocument.service.UserService;
 import com.rabiloo.sharedocument.util.Constants;
 
@@ -27,6 +29,10 @@ public class LoginController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private DocumentService documentService;
+	@Autowired
+	private ExamService examService;
 
 	@GetMapping("/login")
 	public String login() {
@@ -36,6 +42,9 @@ public class LoginController {
 	@GetMapping("/")
 	public String manager(Model model) {
 		model.addAttribute("totalUser", userService.countByDeleted(false));
+		model.addAttribute("totalDocument", documentService.countAll());
+		model.addAttribute("numberOfDownload", documentService.coutnNumberOfDownload());
+		model.addAttribute("totalExam", examService.countAll());
 		return "manager/index";
 	}
 

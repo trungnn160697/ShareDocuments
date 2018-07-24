@@ -34,7 +34,7 @@
           <div class="widget-small info coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
             <div class="info">
               <h5>Số tài liệu</h5>
-              <p><b>25</b></p>
+              <p><b th:text="${totalDocument}">25</b></p>
             </div>
           </div>
         </div>
@@ -42,15 +42,15 @@
           <div class="widget-small warning coloured-icon"><i class="icon fa fa-download fa-3x"></i>
             <div class="info">
               <h5>Số lượt tải</h5>
-              <p><b>10</b></p>
+              <p><b th:text="${numberOfDownload}">10</b></p>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
           <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
             <div class="info">
-              <h5>Số lượt thi thử</h5>
-              <p><b>500</b></p>
+              <h5>Số đề thi thử</h5>
+              <p><b th:text="${totalExam}">500</b></p>
             </div>
           </div>
         </div>

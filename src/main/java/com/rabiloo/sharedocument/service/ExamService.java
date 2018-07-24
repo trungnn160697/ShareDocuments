@@ -74,4 +74,8 @@ public class ExamService {
 	public Exam update(Exam exam) {
 		return examRepository.save(exam);
 	}
+	public Long countAll() {
+		return examRepository.countByDeleted(false);
+	}
 }
+

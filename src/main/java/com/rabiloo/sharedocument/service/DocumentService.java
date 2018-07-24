@@ -154,4 +154,26 @@ public class DocumentService {
 	public Long countByName(String name, Subject subject) {
 		return documentRepository.countByDeletedAndSubjectAndNameContaining(false, subject, name);
 	}
+
+	public Long countAll() {
+		return documentRepository.countByDeleted(false);
+	}
+
+	public Long coutnNumberOfDownload() {
+		return documentRepository.countDownload();
+	}
+
+	public DocumentResponse findTop3Document() {
+		List<Document> listDocument = documentRepository.findTop3ByOrderByNumberOfDownloadDesc();
+		List<DocumentDto> documentDtos = new ArrayList<>();
+		if (listDocument != null) {
+			if (!CollectionUtils.isEmpty(listDocument)) {
+				documentDtos = listDocument.parallelStream().map(document -> documentMapper.toDto(document))
+						.collect(Collectors.toList());
+			}
+		}
+		DocumentResponse documentResponse = new DocumentResponse();
+		documentResponse.setDocumentDtos(documentDtos);
+		return documentResponse;
+	}
 }
