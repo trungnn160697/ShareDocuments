@@ -949,21 +949,19 @@ section
 }
 .course_footer_content
 {
-	width: 100%;
+	
 	border-top: solid 1px #e5e5e5;
-	padding-top: 9px;
-	padding-bottom: 11px;
 }
 .course_info
 {
 	display: inline-block;
 	font-size: 14px;
 	font-weight: 400;
-	color: #55555a;
+	background:none;
+	height:100px;
 }
 .course_info:first-child
 {
-	margin-right: 18px;
 }
 .course_info i
 {

@@ -41,9 +41,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/document").hasRole("EMPLOYEE")
 			.antMatchers("/document/user-document/*").hasRole("EMPLOYEE")
 			.antMatchers("/exam").hasRole("EMPLOYEE")
+			.antMatchers("/share-document").permitAll()
 			.and()
 			.formLogin().loginPage("/login").usernameParameter("username")
-				.passwordParameter("password").defaultSuccessUrl("/")
+				.passwordParameter("password").defaultSuccessUrl("/share-document")
 				.failureUrl("/login?error").and()
 				.exceptionHandling().accessDeniedPage("/403");
 		http.csrf().disable();

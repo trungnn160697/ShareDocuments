@@ -163,8 +163,8 @@ public class DocumentService {
 		return documentRepository.countDownload();
 	}
 
-	public DocumentResponse findTop3Document() {
-		List<Document> listDocument = documentRepository.findTop3ByOrderByNumberOfDownloadDesc();
+	public DocumentResponse findTop9Document() {
+		List<Document> listDocument = documentRepository.findTop9ByDeletedOrderByNumberOfDownloadDesc(false);
 		List<DocumentDto> documentDtos = new ArrayList<>();
 		if (listDocument != null) {
 			if (!CollectionUtils.isEmpty(listDocument)) {
@@ -175,5 +175,25 @@ public class DocumentService {
 		DocumentResponse documentResponse = new DocumentResponse();
 		documentResponse.setDocumentDtos(documentDtos);
 		return documentResponse;
+	}
+
+	public DocumentResponse findDocumentBySubject(Subject subject, String nameDocument, Integer page) {
+		@SuppressWarnings("deprecation")
+		PageRequest pageRequest = new PageRequest(page, Constants.PAGE_SIZE);
+		List<Document> listDocument = documentRepository
+				.findBySubjectAndDeletedAndNameContaining(subject, false, nameDocument, pageRequest).getContent();
+		List<DocumentDto> documentDtos = new ArrayList<>();
+		if (listDocument != null) {
+			if (!CollectionUtils.isEmpty(listDocument)) {
+				documentDtos = listDocument.parallelStream().map(document -> documentMapper.toDto(document))
+						.collect(Collectors.toList());
+			}
+		}
+		DocumentResponse documentResponse = new DocumentResponse();
+		documentResponse.setDocumentDtos(documentDtos);
+		return documentResponse;
+	}
+	public Integer countDocument(Subject subject, String name) {
+		return documentRepository.countBySubjectAndDeletedAndNameContaining(subject, false, name);
 	}
 }

@@ -11,4 +11,5 @@ public class Constants {
 	public static final String URL_IMAGE_DOCUMENT = "E:\\ShareDocuments\\src\\main\\resources\\static\\images\\document\\";
 	public static final String URL_IMAGE_QUESTION = "E:\\ShareDocuments\\src\\main\\resources\\static\\images\\question\\";
 	public static Integer pageSize;
+	public static final Integer PAGE_SIZE = 1;
 }

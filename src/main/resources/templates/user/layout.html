@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<title>Tài liệu trực tuyến</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Unicat project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/bootstrap4/bootstrap.min.css}">
+<link th:href="@{/user/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/user/plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/user/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/user/plugins/OwlCarousel2-2.2.1/animate.css}">
+
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/main_styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/responsive.css}">
+<!-- <link rel="stylesheet" type="text/css" th:href="@{/user/styles/course.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/course_responsive.css}"> -->
+ <link rel="stylesheet" type="text/css" th:href="@{/user/styles/courses.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/courses_responsive.css}"> 
+
+<script th:src="@{/user/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/user/styles/bootstrap4/popper.js}"></script>
+<script th:src="@{/user/styles/bootstrap4/bootstrap.min.js}"></script>
+<script th:src="@{/user/plugins/greensock/TweenMax.min.js}"></script>
+<script th:src="@{/user/plugins/greensock/TimelineMax.min.js}"></script>
+<script th:src="@{/user/plugins/scrollmagic/ScrollMagic.min.js}"></script>
+<script th:src="@{/user/plugins/greensock/animation.gsap.min.js}"></script>
+<script th:src="@{/user/plugins/greensock/ScrollToPlugin.min.js}"></script>
+<script th:src="@{/user/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
+<script th:src="@{/user/plugins/easing/easing.js}"></script>
+<script th:src="@{/user/plugins/parallax-js-master/parallax.min.js}"></script>
+<script th:src="@{/user/js/custom.js}"></script>
+<script th:src="@{/user/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<script th:src="@{/user/js/course.js}"></script>
+<script th:src="@{/user/js/courses.js}"></script>
+
+</head>
+<body>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<header class="header" th:fragment="header">
+			
+		<!-- Top Bar -->
+		<div class="top_bar">
+			<div class="top_bar_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+								<ul class="top_bar_contact_list">
+									<li><div class="question">Bạn có câu hỏi?</div></li>
+									<li>
+										<i class="fa fa-phone" aria-hidden="true"></i>
+										<div>0169-6927-189</div>
+									</li>
+									<li>
+										<i class="fa fa-envelope-o" aria-hidden="true"></i>
+										<div>trungnn160697@gmail.com</div>
+									</li>
+								</ul>
+								<div class="top_bar_login ml-auto">
+									<th:block th:if="${session.userLogin==null}">
+										<div class="login_button"><a href="/login">Đăng nhập/Đăng kí</a></div>
+									</th:block>
+									<th:block th:if="${session.userLogin!=null}">
+										<div class="login_button"><a href="/info-user"><span th:text="${session.userLogin.userDto.fullName}"></span></a><a href="/logout"><span>Thoát</span></a></div>
+									</th:block>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>				
+		</div>
+
+		<!-- Header Content -->
+		<div class="header_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="header_content d-flex flex-row align-items-center justify-content-start">
+							<div class="logo_container">
+								<a href="#">
+									
+								</a>
+							</div>
+							<nav class="main_nav_contaner ml-auto">
+								<ul class="main_nav">
+									<li class="active"><a href="/share-document">Trang chủ</a></li>
+									<li><a href="/share-document/1/1">Toán học</a></li>
+									<li><a href="/share-document/2">Vật lí</a></li>
+									<li><a href="/share-document/3">Hóa học</a></li>
+									<li><a href="#">Thi thử</a></li>
+									
+								</ul>
+								
+
+								<!-- Hamburger -->
+
+								
+							</nav>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Header Search Panel -->
+		<div class="header_search_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="header_search_content d-flex flex-row align-items-center justify-content-end">
+							<form action="#" class="header_search_form">
+								<input type="search" class="search_input" placeholder="Search" required="required">
+								<button class="header_search_button d-flex flex-column align-items-center justify-content-center">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>			
+		</div>			
+	</header>
+
+	<!-- Menu -->
+
+	<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400" th:fragment="menu">
+		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
+		<div class="search">
+			<form action="#" class="header_search_form menu_mm">
+				<input type="search" class="search_input menu_mm" placeholder="Search" required="required">
+				<button class="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
+					<i class="fa fa-search menu_mm" aria-hidden="true"></i>
+				</button>
+			</form>
+		</div>
+		<nav class="menu_nav">
+			<ul class="menu_mm">
+				<li class="menu_mm"><a href="index.html">Home</a></li>
+				<li class="menu_mm"><a href="#">About</a></li>
+				<li class="menu_mm"><a href="#">Courses</a></li>
+				<li class="menu_mm"><a href="#">Blog</a></li>
+				<li class="menu_mm"><a href="#">Page</a></li>
+				<li class="menu_mm"><a href="contact.html">Contact</a></li>
+			</ul>
+		</nav>
+	</div>
+	
+	
+	<!-- Footer -->
+
+	<footer class="footer" th:fragment="footer">
+		<div class="footer_background" th:style="'background-image:url('+@{/user/images/footer_background.png}+')'"></div>
+		<div class="container">
+			<div class="row footer_row">
+				<div class="col">
+					<div class="footer_content">
+						<div class="row">
+
+							<div class="col-lg-3 footer_col">
+					
+								<!-- Footer About -->
+								<div class="footer_section footer_about">
+									<div class="footer_logo_container">
+										<a href="#">
+											<span class="footer_logo_text">GaTrongTap<span>Bay</span></span>
+										</a>
+									</div>
+									<div class="footer_about_text">
+										<p>Website chia sẻ tài liệu miễn phí.</p>
+									</div>
+									<div class="footer_social">
+										<ul>
+											<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+										</ul>
+									</div>
+								</div>
+								
+							</div>
+
+							<div class="col-lg-3 footer_col">
+					
+								<!-- Footer Contact -->
+								<div class="footer_section footer_contact">
+									<div class="footer_title">Contact Us</div>
+									<div class="footer_contact_info">
+										<ul>
+											<li>Email: trungnn160697@gmail.com</li>
+											<li>Phone:  0169 6927 189</li>
+											<li>IS2-K60 Đại học Bách Khoa Hà Nội</li>
+										</ul>
+									</div>
+								</div>
+								
+							</div>
+
+							<div class="col-lg-3 footer_col">
+					
+								<!-- Footer links -->
+								<div class="footer_section footer_links">
+									<div class="footer_title">Menu</div>
+									<div class="footer_links_container">
+										<ul>
+											<li><a href="/share-document">Trang chủ</a></li>
+											<li><a href="/share-document/1">Toán học</a></li>
+											<li><a href="/share-document/2">Vật lí</a></li>
+											<li><a href="/share-document/3">Hóa học</a></li>
+											<li><a href="courses.html">Thi thử</a></li>
+										</ul>
+									</div>
+								</div>
+								
+							</div>
+
+							<div class="col-lg-3 footer_col clearfix">
+					
+								<!-- Footer links -->
+								<div class="footer_section footer_mobile">
+									<div class="footer_title">Mobile</div>
+									<div class="footer_mobile_content">
+										<div class="footer_image"><a href="#"><img th:src="@{/user/images/mobile_1.png}" alt=""></a></div>
+										<div class="footer_image"><a href="#"><img th:src="@{/user/images/mobile_2.png}" alt=""></a></div>
+									</div>
+								</div>
+								
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row copyright_row">
+				<div class="col">
+					<div class="copyright d-flex flex-lg-row flex-column align-items-center justify-content-start">
+						<div class="cr_text">Copyright &copy;<script>document.write(new Date().getFullYear());</script> | Developer Nguyễn NT </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
+
+</body>
+</html>

@@ -26,7 +26,14 @@ public interface DocumentRepository extends JpaRepository<Document, Integer> {
 	Long countByDeletedAndSubjectAndNameContaining(boolean deleted, Subject subject, String name);
 
 	Long countByDeleted(boolean deleted);
+
 	@Query("SELECT SUM(d.numberOfDownload) FROM Document d WHERE d.deleted = false")
 	Long countDownload();
-	List<Document> findTop3ByOrderByNumberOfDownloadDesc();
+
+	List<Document> findTop9ByDeletedOrderByNumberOfDownloadDesc(boolean deleted);
+
+	Page<Document> findBySubjectAndDeletedAndNameContaining(Subject subject, boolean deleted, String name,
+			Pageable pageable);
+	
+	Integer countBySubjectAndDeletedAndNameContaining(Subject subject, boolean deleted, String name);
 }
