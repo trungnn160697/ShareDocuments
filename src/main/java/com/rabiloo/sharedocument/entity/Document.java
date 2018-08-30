@@ -50,6 +50,9 @@ public class Document {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@JoinColumn(name = "number_of_rate")
+	private Integer numberOfRate;
+
 	public Document(String name, String description, String image, String date, String linkDocument) {
 		super();
 		this.name = name;
@@ -149,6 +152,14 @@ public class Document {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Integer getNumberOfRate() {
+		return numberOfRate;
+	}
+
+	public void setNumberOfRate(Integer numberOfRate) {
+		this.numberOfRate = numberOfRate;
 	}
 
 }

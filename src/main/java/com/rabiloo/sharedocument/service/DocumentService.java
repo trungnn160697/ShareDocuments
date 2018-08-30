@@ -69,6 +69,7 @@ public class DocumentService {
 		Document document = documentMapper.toEntity(documentRequest);
 		document.setDeleted(false);
 		document.setRate(0.0);
+		document.setNumberOfRate(0);
 		document.setNumberOfDownload(0);
 		document.setSubject(subjectService.findById(documentRequest.getSubjectId()));
 		document.setUser(userService.findById(documentRequest.getIdUser()));
@@ -80,11 +81,8 @@ public class DocumentService {
 
 		UserResponse userLogin = (UserResponse) session.getAttribute("userLogin");
 		String urlImage = "";
-		if (image == null) {
-			urlImage = userLogin.getUserDto().getImage();
-		} else {
-			urlImage = UploadUtil.upload(image, Constants.URL_IMAGE_DOCUMENT, "image");
-		}
+		urlImage = UploadUtil.upload(image, Constants.URL_IMAGE_DOCUMENT, "image");
+
 		DocumentRequest documentRequest = new DocumentRequest(name, description, urlImage,
 				Format.formatDate(new Date()), subjectId, UploadUtil.upload(document, Constants.URL_DOCUMENT));
 		documentRequest.setIdUser(userLogin.getUserDto().getId());
@@ -193,7 +191,53 @@ public class DocumentService {
 		documentResponse.setDocumentDtos(documentDtos);
 		return documentResponse;
 	}
+
 	public Integer countDocument(Subject subject, String name) {
 		return documentRepository.countBySubjectAndDeletedAndNameContaining(subject, false, name);
 	}
+
+	public DocumentResponse findTop3DocumentBySubject(Subject subject) {
+		List<Document> listDocument = documentRepository.findTop3ByDeletedAndSubjectOrderByNumberOfDownloadDesc(false,
+				subject);
+		List<DocumentDto> documentDtos = new ArrayList<>();
+		if (listDocument != null) {
+			if (!CollectionUtils.isEmpty(listDocument)) {
+				documentDtos = listDocument.parallelStream().map(document -> documentMapper.toDto(document))
+						.collect(Collectors.toList());
+			}
+		}
+		DocumentResponse documentResponse = new DocumentResponse();
+		documentResponse.setDocumentDtos(documentDtos);
+		return documentResponse;
+	}
+
+	public Document rateDocument(Document document, Integer rate) {
+		Integer numberOfRate = document.getNumberOfRate();
+		Double updateRate = (double) ((rate + numberOfRate * document.getRate()) / (numberOfRate + 1));
+		Double result = (Math.round(updateRate * 100.00) / 100.00);
+		document.setNumberOfRate(document.getNumberOfRate() + 1);
+		document.setRate(result);
+		return documentRepository.save(document);
+
+	}
+
+	public Integer countNumberOfDownloadBySubject(Integer subjectId) {
+		return documentRepository.countNumberOfDownloadBySubject(subjectId);
+	}
+
+	public void update(Integer id, String name, Integer subjectId, String description, MultipartFile image,
+			MultipartFile linkDocument) {
+		Document document = documentRepository.findById(id).get();
+		document.setName(name);
+		document.setDescription(description);
+		document.setSubject(subjectService.findById(subjectId));
+		if (image != null) {
+			document.setImage(UploadUtil.upload(image, Constants.URL_IMAGE_DOCUMENT, "image"));
+		}
+		if (linkDocument != null) {
+			document.setLinkDocument(UploadUtil.upload(linkDocument, Constants.URL_DOCUMENT));
+		}
+		documentRepository.save(document);
+	}
+
 }

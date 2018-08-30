@@ -1,0 +1,32 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	<changeSet id="create_table_document" author="trungnn">
+		<createTable tableName="document">
+			<column name="id" type="int"  autoIncrement="true">
+				<constraints nullable="false" unique="true"
+					primaryKey="true" />
+			</column>
+			<column name="subject_id" type="int"/>
+			<column name="user_id" type="int"/>
+			<column name="name" type="text"/>
+			<column name="description" type="text"/>
+			<column name="number_of_download" type="int"/>
+			<column name="image" type="text"/>
+			<column name="date" type="date"/>
+			<column name="rate" type="float"/>
+			<column name="link_document" type="text"/>
+			<column name="deleted" type="boolean"/>
+			<column name="number_of_rate" type="int"/>
+			
+		</createTable>
+		<addForeignKeyConstraint baseTableName="document" baseColumnNames="user_id"
+  				constraintName="user_document_fk"
+  		referencedTableName="user" referencedColumnNames="id"/>
+  		<addForeignKeyConstraint baseTableName="document" baseColumnNames="subject_id"
+  				constraintName="subject_fk"
+  		referencedTableName="subject" referencedColumnNames="id"/>
+	</changeSet>
+</databaseChangeLog>

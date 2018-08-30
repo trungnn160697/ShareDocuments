@@ -9,6 +9,7 @@ public class UserDto {
 	private String phone;
 	private String image;
 	private String roleName;
+	private Boolean deleted;
 
 	public UserDto() {
 		super();
@@ -27,7 +28,7 @@ public class UserDto {
 	}
 
 	public UserDto(Integer id, String username, String password, String fullName, String email, String phone,
-			String image, String roleName) {
+			String image, String roleName, Boolean deleted) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -37,6 +38,7 @@ public class UserDto {
 		this.phone = phone;
 		this.image = image;
 		this.roleName = roleName;
+		this.deleted = deleted;
 	}
 
 	public Integer getId() {
@@ -101,6 +103,14 @@ public class UserDto {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
 	}
 
 }

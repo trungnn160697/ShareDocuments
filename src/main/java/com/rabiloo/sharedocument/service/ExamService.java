@@ -16,6 +16,7 @@ import com.rabiloo.sharedocument.dto.exam.ExamDto;
 import com.rabiloo.sharedocument.dto.exam.ExamRequest;
 import com.rabiloo.sharedocument.dto.exam.ExamResponse;
 import com.rabiloo.sharedocument.entity.Exam;
+import com.rabiloo.sharedocument.entity.Subject;
 import com.rabiloo.sharedocument.mapper.ExamMapper;
 import com.rabiloo.sharedocument.repository.ExamRepository;
 import com.rabiloo.sharedocument.util.Constants;
@@ -75,6 +76,36 @@ public class ExamService {
 		return examRepository.save(exam);
 	}
 	public Long countAll() {
+		return examRepository.countByDeleted(false);
+	}
+	public ExamResponse getExam(Integer id) {
+		Exam exam = findOne(id);
+		ExamDto examDto = examMapper.toDto(exam);
+		ExamResponse examResponse = new ExamResponse();
+		examResponse.setExamtDto(examDto);
+		return examResponse;
+	}
+	
+	public ExamResponse getExam(String name,Integer page) {
+		ExamResponse examResponse = new ExamResponse();
+		@SuppressWarnings("deprecation")
+		PageRequest pageRequest = new PageRequest(page, Constants.PAGE_SIZE_EXAM);
+		List<ExamDto> examDtos = new ArrayList<>();
+		Page<Exam> pageExam = examRepository.findByDeletedAndNameContaining(false, name, pageRequest);
+		List<Exam> listExam = pageExam.getContent();
+		if (listExam != null) {
+			if (!CollectionUtils.isEmpty(listExam)) {
+				examDtos = listExam.parallelStream().map(exam -> examMapper.toDto(exam)).collect(Collectors.toList());
+			}
+		}
+		examResponse.setExamDtos(examDtos);
+		return examResponse;
+	}
+	
+	public Long countExam(Subject subject) {
+		return examRepository.countByDeletedAndSubject(false, subject);
+	}
+	public Long countExam() {
 		return examRepository.countByDeleted(false);
 	}
 }

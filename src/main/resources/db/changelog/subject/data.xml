@@ -1,0 +1,30 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	<changeSet id="insert_table_subject" author="trungnn">
+	
+		<insert tableName="subject">
+			<column name="name" value="Toán học" />
+			<column name="code" value="MATH" />
+			<column name="description" value="Môn toán học" />
+			<column name="deleted" valueBoolean="false" />
+		</insert>
+		
+		<insert tableName="subject">
+			<column name="name" value="Hóa học" />
+			<column name="code" value="CHEMISTRY" />
+			<column name="description" value="Môn hoá học" />
+			<column name="deleted" valueBoolean="false" />
+		</insert>
+		
+		<insert tableName="subject">
+			<column name="name" value="Vật lí" />
+			<column name="code" value="PHYSICAL" />
+			<column name="description" value="Môn vật lí" />
+			<column name="deleted" valueBoolean="false" />
+		</insert>
+		
+	</changeSet>
+</databaseChangeLog>

@@ -18,4 +18,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	Long countByDeletedAndFullNameContaining(Boolean deleted, String search);
 
 	User findByIdAndDeleted(Integer id,Boolean deleted);
+	
+	Page<User> findByUsernameContainingOrderByIdDesc(String search, Pageable pageable);
+
+	Long countByUsernameContaining(String search);
+	
+	
+	
+
+	
 }

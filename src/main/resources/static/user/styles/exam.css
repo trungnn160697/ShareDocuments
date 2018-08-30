@@ -1,0 +1,45 @@
+.float-right {
+	float: right
+}
+
+.margin-left-100 {
+	margin-left: 100px;
+}
+
+.margin-left-200 {
+	margin-left: 200px;
+}
+
+.exam {
+	font-size: 20px;
+	color: black;
+	margin-top: 20px;
+}
+
+.exam a {
+	color: black;
+}
+
+.exam a:hover {
+	color: blue;
+}
+
+.exams {
+	margin-left: 100px;
+}
+
+.quantityQuestion {
+	font-size: 15px;
+}
+
+.subject-exam {
+	margin-right: 30px;
+	font-size: 15px;
+}
+
+.tilte-exam {
+	text-align: center;
+	font-size: 50px;
+	margin-top: 0;
+	color: #14bdee
+}

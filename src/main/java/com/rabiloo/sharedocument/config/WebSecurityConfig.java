@@ -32,16 +32,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.authorizeRequests()
-			.antMatchers("/").hasRole("EMPLOYEE")
-			.antMatchers("/info-user").hasRole("ADMIN")
+			
+			.antMatchers("/").hasRole("CUSTOMER")
 			.antMatchers("/info-user").hasRole("CUSTOMER")
-			.antMatchers("/info-user").hasRole("EMPLOYEE")
 			.antMatchers("/user").hasRole("ADMIN")
+			.antMatchers("/feedback").hasRole("ADMIN")
 			.antMatchers("/subject").hasRole("ADMIN")
-			.antMatchers("/document").hasRole("EMPLOYEE")
-			.antMatchers("/document/user-document/*").hasRole("EMPLOYEE")
-			.antMatchers("/exam").hasRole("EMPLOYEE")
+			.antMatchers("/document").hasRole("CUSTOMER")
+			.antMatchers("/document/user-document/*").hasRole("CUSTOMER")
+			.antMatchers("/exam").hasRole("CUSTOMER")
 			.antMatchers("/share-document").permitAll()
+			.antMatchers("/my-document").hasRole("CUSTOMER")
 			.and()
 			.formLogin().loginPage("/login").usernameParameter("username")
 				.passwordParameter("password").defaultSuccessUrl("/share-document")

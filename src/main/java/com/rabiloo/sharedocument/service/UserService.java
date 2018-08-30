@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.rabiloo.sharedocument.dto.user.UserDto;
 import com.rabiloo.sharedocument.dto.user.UserRequest;
 import com.rabiloo.sharedocument.dto.user.UserResponse;
+import com.rabiloo.sharedocument.entity.Document;
 import com.rabiloo.sharedocument.entity.User;
 import com.rabiloo.sharedocument.entity.UserRole;
 import com.rabiloo.sharedocument.mapper.UserMapper;
@@ -67,6 +68,7 @@ public class UserService implements UserDetailsService {
 		org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(
 				user.getUsername(), user.getPassword(), grantedAuthority);
 		session.setAttribute("userLogin", getUserLogin(userDetails));
+		session.setAttribute("userRegister", countByRegister());
 		return userDetails;
 	}
 
@@ -85,9 +87,9 @@ public class UserService implements UserDetailsService {
 				UploadUtil.upload(file, Constants.URL_IMAGE_USER, "image"));
 		User user = userMapper.toEntity(userRequest);
 		List<UserRole> userRoles = new ArrayList<>();
-		userRoles.add(userRoleService.findById(3));
+		userRoles.add(userRoleService.findById(2));
 		user.setUserRoles(userRoles);
-		user.setDeleted(false);
+		user.setDeleted(null);
 		userRepository.save(user);
 	}
 
@@ -123,16 +125,28 @@ public class UserService implements UserDetailsService {
 
 	public void delete(Integer id) {
 		User user = userRepository.findById(id).get();
+		List<Document> documents =  user.getListDocument();
+		for (int i = 0; i < documents.size(); i++) {
+			documents.get(i).setDeleted(true);
+		}
+		user.setListDocument(documents);
 		user.setDeleted(true);
 		userRepository.save(user);
+		emailSender.send(MailUtil.sendMail(user.getEmail(), "Vô hiệu hóa tài khoản",
+				"Tài khoản của bạn tại website Share-Document đã bị vô hiệu hóa. Liên hệ với website để biết lí do."));
 	}
 
 	public void upgrade(Integer id) {
 		User user = userRepository.findById(id).get();
-		List<UserRole> roles = new ArrayList<>();
-		roles.add(userRoleService.findById(2));
-		user.setUserRoles(roles);
+		List<Document> documents =  user.getListDocument();
+		for (int i = 0; i < documents.size(); i++) {
+			documents.get(i).setDeleted(false);
+		}
+		user.setListDocument(documents);
+		user.setDeleted(false);
 		userRepository.save(user);
+		emailSender.send(MailUtil.sendMail(user.getEmail(), "Active tài khoản",
+				"Tài khoản của bạn tại website Share-Document đã được active. Đăng nhập ngay."));
 	}
 
 	public User findByUsernameAndDeleted(String username, Boolean deleted) {
@@ -184,6 +198,30 @@ public class UserService implements UserDetailsService {
 
 	public User findById(Integer id) {
 		return userRepository.findByIdAndDeleted(id, false);
+	}
+
+	public Long countByFullNameContaining(String search) {
+		return userRepository.countByUsernameContaining(search);
+	}
+
+	public UserResponse findByFullNameContaining(String search, Integer page) {
+		UserResponse userResponse = new UserResponse();
+		List<UserDto> userDtos = new ArrayList<>();
+		@SuppressWarnings("deprecation")
+		PageRequest pageRequest = new PageRequest(page, Constants.pageSize);
+		Page<User> pageUser = userRepository.findByUsernameContainingOrderByIdDesc(search, pageRequest);
+		List<User> listUser = pageUser.getContent();
+		if (listUser != null) {
+			if (!CollectionUtils.isEmpty(listUser)) {
+				userDtos = listUser.parallelStream().map(user -> userMapper.toDto(user)).collect(Collectors.toList());
+			}
+		}
+		userResponse.setUserDtos(userDtos);
+		return userResponse;
+	}
+
+	public Long countByRegister() {
+		return userRepository.countByDeleted(null);
 	}
 
 }

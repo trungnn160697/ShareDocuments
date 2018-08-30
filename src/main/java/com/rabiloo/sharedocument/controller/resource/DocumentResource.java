@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.rabiloo.sharedocument.dto.document.DocumentResponse;
+import com.rabiloo.sharedocument.dto.user.UserResponse;
 import com.rabiloo.sharedocument.entity.Document;
 import com.rabiloo.sharedocument.entity.Subject;
 import com.rabiloo.sharedocument.entity.User;
@@ -43,7 +44,7 @@ public class DocumentResource {
 	private SubjectService subjectService;
 
 	@GetMapping("/listdocument")
-	public ResponseEntity<DocumentResponse> getListDocument(HttpServletRequest request) {
+	public ResponseEntity<DocumentResponse> getListDocument(HttpServletRequest request, HttpSession session) {
 		String search = "";
 		if (request.getParameter("sSearch") != null) {
 			search = request.getParameter("sSearch");
@@ -56,6 +57,7 @@ public class DocumentResource {
 		if (request.getParameter("iDisplayStart") != null)
 			iDisplayStart = Integer.parseInt(request.getParameter("iDisplayStart"));
 		Integer page = (iDisplayStart / pageDisplayLength);
+
 		DocumentResponse documentResponse = documentService.findByName(search, page);
 		documentResponse.setAaData(documentResponse.getDocumentDtos());
 		documentResponse.setiTotalDisplayRecords(documentService.countByName(search));
@@ -68,7 +70,7 @@ public class DocumentResource {
 			@RequestParam("idSubject") Integer subjectId, @RequestParam("description") String description,
 			@RequestParam(name = "image", required = false) MultipartFile image,
 			@RequestParam(name = "linkDocument", required = false) MultipartFile linkDocument) {
-		if (!DocumentValidator.validateForm(name, subjectId, description,linkDocument)) {
+		if (!DocumentValidator.validateForm(name, subjectId, description, image, linkDocument)) {
 			DocumentResponse documentResponse = new DocumentResponse();
 			documentResponse.setMessage(new MessageUtil("Không được bỏ trống thông tin"));
 			return new ResponseEntity<DocumentResponse>(documentResponse, HttpStatus.OK);
@@ -169,6 +171,53 @@ public class DocumentResource {
 		documentResponse.setAaData(documentResponse.getDocumentDtos());
 		documentResponse.setiTotalDisplayRecords(documentService.countByName(search, subject));
 		documentResponse.setiTotalRecords(documentService.countByName(search, subject));
+		return new ResponseEntity<DocumentResponse>(documentResponse, HttpStatus.OK);
+	}
+
+	@PostMapping("/rate/{id}")
+	public ResponseEntity<Double> rate(@RequestParam("rate") Integer rate, @PathVariable("id") Integer id) {
+		Document document = documentService.findOne(id);
+		Document result = documentService.rateDocument(document, rate);
+		return new ResponseEntity<Double>(result.getRate(), HttpStatus.OK);
+	}
+
+	@GetMapping("/listMyDocument")
+	public ResponseEntity<DocumentResponse> getMyDocument(HttpServletRequest request, HttpSession session) {
+		UserResponse userLogin = (UserResponse) session.getAttribute("userLogin");
+		User user = userService.findById(userLogin.getUserDto().getId());
+		String search = "";
+		if (request.getParameter("sSearch") != null) {
+			search = request.getParameter("sSearch");
+		}
+		Integer pageDisplayLength = 1;
+		if (request.getParameter("iDisplayLength") != null)
+			pageDisplayLength = Integer.parseInt(request.getParameter("iDisplayLength"));
+		Constants.pageSize = pageDisplayLength;
+		Integer iDisplayStart = 1;
+		if (request.getParameter("iDisplayStart") != null)
+			iDisplayStart = Integer.parseInt(request.getParameter("iDisplayStart"));
+		Integer page = (iDisplayStart / pageDisplayLength);
+
+		DocumentResponse documentResponse = documentService.findByName(search, user, page);
+		documentResponse.setAaData(documentResponse.getDocumentDtos());
+		documentResponse.setiTotalDisplayRecords(documentService.countByName(search, user));
+		documentResponse.setiTotalRecords(documentService.countByName(search, user));
+		return new ResponseEntity<DocumentResponse>(documentResponse, HttpStatus.OK);
+	}
+
+	@PostMapping("/document/update-document")
+	public ResponseEntity<DocumentResponse> update(@RequestParam("id") Integer id, @RequestParam("name") String name,
+			@RequestParam("idSubject") Integer subjectId, @RequestParam("description") String description,
+			@RequestParam(name = "image", required = false) MultipartFile image,
+			@RequestParam(name = "linkDocument", required = false) MultipartFile linkDocument) {
+		if (!DocumentValidator.validateForm(name, subjectId, description)) {
+			DocumentResponse documentResponse = new DocumentResponse();
+			documentResponse.setMessage(new MessageUtil("Không được bỏ trống thông tin"));
+			return new ResponseEntity<DocumentResponse>(documentResponse, HttpStatus.OK);
+		}
+		documentService.update(id, name, subjectId, description, image, linkDocument);
+		DocumentResponse documentResponse = new DocumentResponse();
+		documentResponse.setMessage(new MessageUtil("Thành công", 200));
 		return new ResponseEntity<DocumentResponse>(documentResponse, HttpStatus.OK);
 	}
 

@@ -18,6 +18,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/user/styles/course_responsive.css}"> -->
  <link rel="stylesheet" type="text/css" th:href="@{/user/styles/courses.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/user/styles/courses_responsive.css}"> 
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/exam.css}"> 
 
 <script th:src="@{/user/js/jquery-3.2.1.min.js}"></script>
 <script th:src="@{/user/styles/bootstrap4/popper.js}"></script>
@@ -32,9 +33,10 @@
 <script th:src="@{/user/plugins/parallax-js-master/parallax.min.js}"></script>
 <script th:src="@{/user/js/custom.js}"></script>
 <script th:src="@{/user/plugins/colorbox/jquery.colorbox-min.js}"></script>
-<script th:src="@{/user/js/course.js}"></script>
-<script th:src="@{/user/js/courses.js}"></script>
 
+<script th:src="@{/user/js/courses.js}"></script>
+<script th:src="@{/user/js/feedback.js}"></script>
+<script th:src="@{/user/js/sweetalert.min.js}"></script>
 </head>
 <body>
 
@@ -90,12 +92,10 @@
 							</div>
 							<nav class="main_nav_contaner ml-auto">
 								<ul class="main_nav">
-									<li class="active"><a href="/share-document">Trang chủ</a></li>
-									<li><a href="/share-document/1/1">Toán học</a></li>
-									<li><a href="/share-document/2">Vật lí</a></li>
-									<li><a href="/share-document/3">Hóa học</a></li>
-									<li><a href="#">Thi thử</a></li>
-									
+									<li class="" th:classappend="${session.active_menu == 0 ? 'active':''}"><a href="/share-document">Trang chủ</a></li>
+									<li th:classappend="${session.active_menu == 1 ? 'active':''}"><a href="/share-document/1/1">Toán học</a></li>
+									<li th:classappend="${session.active_menu == 2 ? 'active':''}"><a href="/share-document/2/1">Hóa học</a></li>
+									<li th:classappend="${session.active_menu == 3 ? 'active':''}"><a href="/share-document/3/1">Vật lí</a></li>
 								</ul>
 								
 

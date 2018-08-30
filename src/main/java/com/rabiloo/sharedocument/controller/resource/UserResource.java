@@ -33,7 +33,7 @@ public class UserResource {
 	public ResponseEntity<UserResponse> save(@RequestParam("username") String username,
 			@RequestParam("password") String password, @RequestParam("fullName") String fullName,
 			@RequestParam("email") String email, @RequestParam("phone") String phone,
-			@RequestParam("image") MultipartFile image) {
+			@RequestParam("image") MultipartFile image, HttpSession session) {
 
 		if (!UserValidation.validateForm(username, password, fullName, email, phone)) {
 			UserResponse userResponse = new UserResponse(new MessageUtil("Không được bỏ trống các ô"));
@@ -66,6 +66,7 @@ public class UserResource {
 
 		userService.save(username, password, fullName, email, phone, image);
 		UserResponse userResponse = new UserResponse(new MessageUtil("Tạo tài khoản thành công, đăng nhập ngay?", 200));
+		session.setAttribute("userRegister", userService.countByRegister());
 		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 	}
 
@@ -81,7 +82,7 @@ public class UserResource {
 		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 	}
 
-	@PostMapping(value="/change-password")
+	@PostMapping(value = "/change-password")
 	public ResponseEntity<UserResponse> changePassword(@RequestParam("id") Integer id,
 			@RequestParam("currentPassword") String currentPassword, @RequestParam("newPassword") String newPassword,
 			@RequestParam("confirmNewPassword") String confirmNewPassword, HttpSession session) {
@@ -148,10 +149,10 @@ public class UserResource {
 		if (request.getParameter("iDisplayStart") != null)
 			iDisplayStart = Integer.parseInt(request.getParameter("iDisplayStart"));
 		Integer page = (iDisplayStart / pageDisplayLength);
-		UserResponse userResponse = userService.findByDeletedAndFullNameContaining(false, search, page);
+		UserResponse userResponse = userService.findByFullNameContaining(search, page);
 		userResponse.setAaData(userResponse.getUserDtos());
-		userResponse.setiTotalDisplayRecords(userService.countByDeletedAndFullNameContaining(false, search));
-		userResponse.setiTotalRecords(userService.countByDeletedAndFullNameContaining(false, search));
+		userResponse.setiTotalDisplayRecords(userService.countByFullNameContaining(search));
+		userResponse.setiTotalRecords(userService.countByFullNameContaining(search));
 		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 	}
 
@@ -162,8 +163,9 @@ public class UserResource {
 	}
 
 	@PutMapping("/user/upgrade/{id}")
-	public ResponseEntity<UserResponse> upgrade(@PathVariable("id") Integer id) {
+	public ResponseEntity<UserResponse> upgrade(@PathVariable("id") Integer id, HttpSession session) {
 		userService.upgrade(id);
+		session.setAttribute("userRegister", userService.countByRegister());
 		return new ResponseEntity<UserResponse>(HttpStatus.OK);
 	}
 }

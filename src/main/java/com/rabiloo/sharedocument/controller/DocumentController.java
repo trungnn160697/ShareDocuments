@@ -19,8 +19,9 @@ public class DocumentController {
 	private UserService userService;
 
 	@GetMapping("/document")
-	public String document(Model model) {
+	public String document(Model model,HttpSession session) {
 		model.addAttribute("subjects", subjectService.findAll());
+		session.setAttribute("active_menu",4);
 		return "manager/document";
 	}
 
@@ -37,5 +38,13 @@ public class DocumentController {
 		model.addAttribute("subject", subjectService.findById(id));
 		return "manager/list-document-subject";
 	}
+	
+	@GetMapping("/my-document")
+	public String myDocument(Model model,HttpSession session) {
+		model.addAttribute("subjects", subjectService.findAll());
+		session.setAttribute("active_menu",6);
+		return "manager/my-document";
+	}
+
 
 }

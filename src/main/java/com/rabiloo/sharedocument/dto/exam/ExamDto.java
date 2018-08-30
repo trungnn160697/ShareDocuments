@@ -1,5 +1,9 @@
 package com.rabiloo.sharedocument.dto.exam;
 
+import java.util.List;
+
+import com.rabiloo.sharedocument.dto.question.QuestionDto;
+
 public class ExamDto {
 	private Integer id;
 	private String name;
@@ -7,6 +11,7 @@ public class ExamDto {
 	private Integer subjectId;
 	private Integer quantityQuestion;
 	private Boolean deleted;
+	private List<QuestionDto> questionDtos;
 
 	public ExamDto(Integer id, String name, String nameSubject, Integer subjectId, Integer quantityQuestion,
 			Boolean deleted) {
@@ -17,6 +22,18 @@ public class ExamDto {
 		this.subjectId = subjectId;
 		this.quantityQuestion = quantityQuestion;
 		this.deleted = deleted;
+	}
+
+	public ExamDto(Integer id, String name, String nameSubject, Integer subjectId, Integer quantityQuestion,
+			Boolean deleted, List<QuestionDto> questionDtos) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.nameSubject = nameSubject;
+		this.subjectId = subjectId;
+		this.quantityQuestion = quantityQuestion;
+		this.deleted = deleted;
+		this.questionDtos = questionDtos;
 	}
 
 	public ExamDto() {
@@ -69,6 +86,14 @@ public class ExamDto {
 
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public List<QuestionDto> getQuestionDtos() {
+		return questionDtos;
+	}
+
+	public void setQuestionDtos(List<QuestionDto> questionDtos) {
+		this.questionDtos = questionDtos;
 	}
 
 }

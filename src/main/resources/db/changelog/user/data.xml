@@ -1,0 +1,47 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	<changeSet id="insert_table_user" author="trungnn">
+		<insert tableName="user">
+			<column name="username" value="admin" />
+			<column name="password" value="$2a$10$9pX1aBdb3fMwHI5XEJrRke0ZTMO1x5PGNBIRPX3GmgubZNoK6CXOS" />
+			<column name="full_name" value="Nguyễn Ngọc Trung" />
+			<column name="email" value="trungnn160697@gmail.com" />
+			<column name="phone" value="01696927189" />
+			<column name="image" value="image=25591671_720544931486834_6083897298114642736_n.jpg" />
+			<column name="deleted" valueBoolean="false" />
+		</insert>
+		
+		<insert tableName="user">
+			<column name="username" value="haucl" />
+			<column name="password" value="$2a$10$9pX1aBdb3fMwHI5XEJrRke0ZTMO1x5PGNBIRPX3GmgubZNoK6CXOS" />
+			<column name="full_name" value="Lê Công Hậu" />
+			<column name="email" value="anhlahau@gmail.com" />
+			<column name="phone" value="0012364897" />
+			<column name="image" value="image=24058727_754569334742238_961757049669666567_n.jpg" />
+			<column name="deleted" valueBoolean="false" />
+		</insert>
+		
+		<insert tableName="user">
+			<column name="username" value="lyvh" />
+			<column name="password" value="$2a$10$9pX1aBdb3fMwHI5XEJrRke0ZTMO1x5PGNBIRPX3GmgubZNoK6CXOS" />
+			<column name="full_name" value="Vương Hương Ly" />
+			<column name="email" value="ly@gmail.com" />
+			<column name="phone" value="0123456789" />
+			<column name="image" value="image=38276258_837561466442178_1771561863708934144_n.jpg" />
+			<column name="deleted" valueBoolean="false" />
+		</insert>
+		
+		<insert tableName="user">
+			<column name="username" value="sonbom" />
+			<column name="password" value="$2a$10$9pX1aBdb3fMwHI5XEJrRke0ZTMO1x5PGNBIRPX3GmgubZNoK6CXOS" />
+			<column name="full_name" value="Dương Ngọc Sơn" />
+			<column name="email" value="20153177@student.hust.edu.vn" />
+			<column name="phone" value="0989273651" />
+			<column name="image" value="image=21768027_903148196506842_8931665172284917343_n.jpg" />
+			<column name="deleted" valueBoolean="false" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

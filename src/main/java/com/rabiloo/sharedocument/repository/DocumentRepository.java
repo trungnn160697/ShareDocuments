@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.rabiloo.sharedocument.entity.Document;
 import com.rabiloo.sharedocument.entity.Subject;
@@ -36,4 +37,8 @@ public interface DocumentRepository extends JpaRepository<Document, Integer> {
 			Pageable pageable);
 	
 	Integer countBySubjectAndDeletedAndNameContaining(Subject subject, boolean deleted, String name);
+	
+	List<Document> findTop3ByDeletedAndSubjectOrderByNumberOfDownloadDesc(boolean deleted,Subject subject);
+	@Query("SELECT SUM(d.numberOfDownload) FROM Document d JOIN d.subject s WHERE s.id=:id  ")
+	Integer countNumberOfDownloadBySubject(@Param("id") Integer id);
 }

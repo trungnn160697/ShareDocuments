@@ -22,15 +22,18 @@ $(document).ready(function(){
 		  {"data":"roleName"},
 		  { "data": "action",
 	            	render: function (data, type, row) {
-	            		if(row.roleName=='Khách'&&row.roleName!='Quản trị viên'){
-	            			return '<a  class="btn btn-primary  btn-upgrade button_action" href="javascript:;" id="'+row.id+'"  title="Nâng cấp tài khoản"><i class="fa fa-level-up"></i></a> <a id="'+row.id+'"  class="btn btn-danger btn-delete button_action" href="javascript:;" title="Xóa" ><i id="deleteUnit" class="fa fa-trash-o" aria-hidden="true"></i></a>';
-	            		}
-	            		else if(row.roleName!='Quản trị viên'){
-	            			return '<a id="'+row.id+'"  class="btn btn-danger btn-delete button_action" href="javascript:;" title="Xóa" ><i id="deleteUnit" class="fa fa-trash-o" aria-hidden="true"></i></a>';
-	            		}
+	            		if(row.roleName!='Quản trị viên'){
+	            			if(row.deleted==null)
+	            				return '<a  class="btn btn-primary  btn-upgrade button_action" href="javascript:;" id="'+row.id+'"  title="Active tài khoản"><i class="fa fa-level-up"></i></a> <a id="'+row.id+'"  class="btn btn-danger btn-delete button_action" href="javascript:;" title="Xóa" ><i id="deleteUnit" class="fa fa-trash-o" aria-hidden="true"></i></a>';
+	            			if(row.deleted==true)
+	            				return '<a  class="btn btn-primary  btn-upgrade button_action" href="javascript:;" id="'+row.id+'"  title="Active tài khoản"> <i class="fa fa-level-up"></i>';
+	            			else
+	            				return '<a id="'+row.id+'"  class="btn btn-danger btn-delete button_action" href="javascript:;" title="Xóa" ><i id="deleteUnit" class="fa fa-trash-o" aria-hidden="true"></i></a>';
+	            		}		
 	            		else{
-	            			return '';
+	            			return '';	        
 	            		}
+	            		
 	            		
 	            }},  
 	      ]
@@ -40,7 +43,7 @@ $(document).ready(function(){
 	 $('#tableUser').on("click",'.btn-delete',function(){
 		  var id = $(this).attr('id');
 		  swal({
-			  title: "Bạn chắc chắn muốn xóa",
+			  title: "Bạn chắc chắn muốn vô hiệu hóa tài khoản này",
 			  icon: "warning",
 			  buttons: true,
 			  dangerMode: true,
@@ -54,7 +57,7 @@ $(document).ready(function(){
 			    	url:"/user/delete/"+id,
 			    	success: function(){ 
                        $('#tableUser').DataTable().ajax.reload(); 
-                       swal("Đã xóa!", "Trở lại trang quản lí nhân viên", "success"); 
+                       swal("Đã vô hiệu hóa!", "Trở lại trang quản lí người dùng", "success"); 
                    },
                    error: function(){
                        swal("Error", "Could not be deleted! :)", "error");   
@@ -69,7 +72,7 @@ $(document).ready(function(){
 		  var formData = new FormData();
 		  var id = $(this).attr('id');
 		  swal({
-			  title: "Bạn chắc chắn muốn nâng cấp",
+			  title: "Bạn chắc chắn muốn active",
 			  icon: "warning",
 			  buttons: true,
 			  dangerMode: true,
@@ -82,8 +85,9 @@ $(document).ready(function(){
 					contentType : false,
 			    	url:"/user/upgrade/"+id,
 			    	success: function(){ 
+			    	  swal("Đã active!", "Trở lại trang quản lí người dùng", "success"); 
                       $('#tableUser').DataTable().ajax.reload(); 
-                      swal("Đã nâng cấp!", "Trở lại trang quản lí nhân viên", "success"); 
+                      
                   },
                   error: function(){
                       swal("Error", "Could not be deleted! :)", "error");   

@@ -1,0 +1,16 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	<changeSet id="insert_table_feedback" author="trungnn">
+	
+		<insert tableName="feedback">
+			<column name="name" value="Trung Ngọc Nguyễn" />
+			<column name="email" value="goonera11.97@gmail.com" />
+			<column name="content" value="Cảm ơn website" />
+			<column name="deleted" valueBoolean="false" />
+		</insert>
+		
+	</changeSet>
+</databaseChangeLog>

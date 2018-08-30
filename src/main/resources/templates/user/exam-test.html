@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/bootstrap4/bootstrap.min.css}">
+<link th:href="@{/user/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/user/plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/user/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/user/plugins/OwlCarousel2-2.2.1/animate.css}">
+
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/main_styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/responsive.css}">
+<!-- <link rel="stylesheet" type="text/css" th:href="@{/user/styles/course.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/course_responsive.css}"> -->
+ <link rel="stylesheet" type="text/css" th:href="@{/user/styles/courses.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/user/styles/courses_responsive.css}"> 
+
+<script th:src="@{/user/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/user/styles/bootstrap4/popper.js}"></script>
+<script th:src="@{/user/styles/bootstrap4/bootstrap.min.js}"></script>
+<script th:src="@{/user/plugins/greensock/TweenMax.min.js}"></script>
+<script th:src="@{/user/plugins/greensock/TimelineMax.min.js}"></script>
+<script th:src="@{/user/plugins/scrollmagic/ScrollMagic.min.js}"></script>
+<script th:src="@{/user/plugins/greensock/animation.gsap.min.js}"></script>
+<script th:src="@{/user/plugins/greensock/ScrollToPlugin.min.js}"></script>
+<script th:src="@{/user/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
+<script th:src="@{/user/plugins/easing/easing.js}"></script>
+<script th:src="@{/user/plugins/parallax-js-master/parallax.min.js}"></script>
+<script th:src="@{/user/js/custom.js}"></script>
+<script th:src="@{/user/plugins/colorbox/jquery.colorbox-min.js}"></script>
+
+<script th:src="@{/user/js/courses.js}"></script>
+<script th:src="@{/user/js/feedback.js}"></script>
+<script th:src="@{/user/js/sweetalert.min.js}"></script>
+<script type="text/javascript" src="http://dreasgrech.com/upload/jslatex/jquery.jslatex.packed.js"></script>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full">
+	</script>
+
+</head>
+<body>
+	<th:block>
+		<div th:each="question,index:${examResponse.examtDto.questionDtos}">
+			<p>Câu <span th:text="${index.count}"></span>:</p>
+			<p th:text="${question.contentQuestion}"></p>
+			<p th:text="${question.answerA}"></p>
+			<p th:text="${question.answerB}"></p>
+			<p th:text="${question.answerC}"></p>
+			<p th:text="${question.answerD}"></p>
+		</div>
+	</th:block>
+</body>
+</html>

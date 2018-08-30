@@ -28,7 +28,8 @@ $(document).ready(function(){
 		  {"data":"rate"},
 		  { "data": "action",
 	            	render: function (data, type, row) {
-	            			return '<a  class="btn btn-primary  btn-view button_action" data-toggle="modal" href="#modal_id_view_document" id="'+row.id+'"  title="Xem chi tiết"><i class="fa fa-eye"></i></a> <a id="'+row.id+'"  class="btn btn-danger btn-delete button_action" href="javascript:;" title="Xóa" ><i id="deleteUnit" class="fa fa-trash-o" aria-hidden="true"></i></a>';
+	            			return '<a  class="btn btn-primary  btn-view button_action" data-toggle="modal" href="#modal_id_view_document" id="'+row.id+'"  title="Xem chi tiết">'
+	            			+'<i class="fa fa-eye"></i></a> <a id="'+row.id+'"  class="btn btn-danger btn-delete button_action" href="javascript:;" title="Xóa" ><i id="deleteUnit" class="fa fa-trash-o" aria-hidden="true"></i></a>';
 	            		}
 	            },  
 	      ]

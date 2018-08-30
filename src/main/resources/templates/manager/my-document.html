@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manager/layout :: head">
+</head>
+<body>
+	<!-- Navbar-->
+    <header class="app-header" th:replace="manager/layout :: header">
+    </header>
+    
+    <!-- Sidebar menu-->
+    <div th:replace="manager/layout :: sidebar">
+    </div>
+    <div class="app-content" style="height:1000px">
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-th-list"></i> Quản lí tài liệu</h1>
+
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+          <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
+          <li class="breadcrumb-item"><a href="/document">Quản lí tài liệu</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-primary button_add_subject" data-toggle="modal" href='#modal_id_add_document' >Thêm mới</a>
+          <div class="tile">
+            <div class="tile-body">
+              <table class="table table-hover table-bordered" id="tableMyDocument">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Tài liệu</th>
+                    <th>Môn học</th>
+                    <th>Người đăng</th>
+                    <th>Lượt tải</th>
+                    <th>Đánh giá</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>	
+  
+ <div class="modal fade" id="modal_id_add_document">
+	   	<div class="modal-dialog">
+	   		<div class="modal-content">
+	   			<div class="modal-header">
+	   				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	   			</div>
+	   			<div class="modal-body">
+	   				<form>
+	   					<div class="form-group">
+	   						<label for="">Tên tài liệu</label>
+	   						<input type="text" class="form-control" id="add_name" placeholder="Tên tài liệu">
+	   					</div>
+	   					<div class="form-group">
+	   						<label for="">Môn học</label>
+	   						 <select name="" id="add_subject" class="form-control" required="required">
+     								 <option value="0">----------------Môn học----------------</option>
+     								 <option th:each="subject:${subjects.subjectDtos}" th:value="${subject.id}" th:text="${subject.name}"></option>
+   							 </select>
+	   					</div>
+	   					<div class="form-group">
+	   						<label for="">Ảnh hiện thị</label>
+	   						<input type="file" id="add_image" class="form-control">
+	   					</div>
+	   					<div class="form-group">
+	   						<label for="">Tài liệu</label>
+	   						<input type="file" id="add_document" class="form-control">
+	   					</div>
+	   					<div class="form-group">
+	   						<label for="">Mô tả</label>
+	   						<textarea name="" id="add_description" class="form-control" rows="3" placeholder="Mô tả"></textarea>
+	   					</div>
+	   					<button type="button" class="btn btn-primary" id="button_add_document">Thêm tài liệu</button>
+	   				</form>
+	   			</div>
+	   		</div>
+	   	</div>
+   	</div>
+   	
+  <div class="modal fade" id="modal_id_update_document">
+	   	<div class="modal-dialog">
+	   		<div class="modal-content">
+	   			<div class="modal-header">
+	   				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	   			</div>
+	   			<div class="modal-body">
+	   				<form>
+	   					<input type="hidden" class="form-control" id="update_id">
+	   					<div class="form-group">
+	   						<label for="">Tên tài liệu</label>
+	   						<input type="text" class="form-control" id="update_name" placeholder="Tên tài liệu">
+	   					</div>
+	   					<div class="form-group">
+	   						<label for="">Môn học</label>
+	   						 <select name="update_subject" id="update_subject" class="form-control" required="required">
+     								 <option value="0">----------------Môn học----------------</option>
+     								 <option th:each="subject:${subjects.subjectDtos}"  th:value="${subject.id}" th:text="${subject.name}"></option>
+   							 </select>
+	   					</div>
+	   					<div class="form-group">
+	   						<label for="">Ảnh hiện thị</label>
+	   						<input type="file" id="update_image" class="form-control">
+	   					</div>
+	   					<div class="form-group">
+	   						<label for="">Tài liệu</label>
+	   						<input type="file" id="update_document" class="form-control">
+	   					</div>
+	   					<div class="form-group">
+	   						<label for="">Mô tả</label>
+	   						<textarea name="" id="update_description" class="form-control" rows="3" placeholder="Mô tả"></textarea>
+	   					</div>
+	   					<button type="button" class="btn btn-primary" id="button_update_document">Cập nhật tài liệu</button>
+	   				</form>
+	   			</div>
+	   		</div>
+	   	</div>
+   	</div>
+  <script type="text/javascript" th:src="@{/js/manager/my-document.js}"></script>
+
+ 
+	 
+</body>
+
+</html>

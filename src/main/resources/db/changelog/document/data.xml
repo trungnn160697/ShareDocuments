@@ -1,0 +1,122 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	<changeSet id="insert_table_document" author="trungnn">
+	
+		<insert tableName="document">
+			<column name="subject_id" value="1"/>
+			<column name="user_id" value="1"/>
+			<column name="name" value="Skill CASIO Tich Phan + Đề trắc nghiệm số 1"/>
+			<column name="description" value="Tổng hơp các kĩ năng casio và đề thi thử trắc nghiệm môn toán"/>
+			<column name="number_of_download" value="8"/>
+			<column name="image" value="image=SkillCasio.png"/>
+			<column name="rate" value="2.59"/>
+			<column name="link_document" value="Skill CASIO Tich Phan + Đề trắc nghiệm số 1.pdf"/>
+			<column name="date" value="2018-07-19"/>
+			<column name="number_of_rate" value="12"/>
+			<column name="deleted" valueBoolean="false"/>
+		</insert>
+		
+		<insert tableName="document">
+			<column name="subject_id" value="1"/>
+			<column name="user_id" value="1"/>
+			<column name="name" value="04-TOANHOCTOITHU7-TUAN4"/>
+			<column name="description" value="Năm nay Toán chuyển đổi từ hình thức Tự Luận sang Trắc Nghiệm là một hình thức thi không hề lạ đối với các em nhưng khá lạ so với môn Toán. Theo thầy các em không có gì phải hoang man bời vì nếu thi Toán dưới hình thức trắc nghiệm thì kiến thức sẽ dàn đều và sẽ dễ hơn, không tập trung quá nhiều vào các câu phân loại như mọi năm. Điều cần làm ngay bây giờ là các em học thật chắc kiến thức 12\r\nvà ôn luyện như bình thường."/>
+			<column name="number_of_download" value="3"/>
+			<column name="image" value="image=toanhocthu7.png"/>
+			<column name="rate" value="3"/>
+			<column name="link_document" value="04-TOANHOCTOITHU7-TUAN4.pdf"/>
+			<column name="date" value="2018-07-19"/>
+			<column name="number_of_rate" value="4"/>
+			<column name="deleted" valueBoolean="false"/>
+		</insert>
+		
+		<insert tableName="document">
+			<column name="subject_id" value="1"/>
+			<column name="user_id" value="1"/>
+			<column name="name" value="Phương pháp qui đổi"/>
+			<column name="description" value="Phương pháp mới để giải quyết các bài toán cực trị"/>
+			<column name="number_of_download" value="3"/>
+			<column name="image" value="image=quidoi.png"/>
+			<column name="rate" value="0"/>
+			<column name="link_document" value="Skill CASIO Tich Phan + Đề trắc nghiệm số 1.pdf"/>
+			<column name="date" value="2018-07-21"/>
+			<column name="number_of_rate" value="0"/>
+			<column name="deleted" valueBoolean="false"/>
+		</insert>
+		
+		<insert tableName="document">
+			<column name="subject_id" value="1"/>
+			<column name="user_id" value="1"/>
+			<column name="name" value="ĐỀ THI THỬ LẦN 1 K2001 CHIEN"/>
+			<column name="description" value="Đề thi thử lần 1 của lớp toán Tân Tây Đô"/>
+			<column name="number_of_download" value="1"/>
+			<column name="image" value="image=dechien.png"/>
+			<column name="rate" value="1"/>
+			<column name="link_document" value="ĐỀ THI THỬ LẦN 1 K2001 CHIEN.doc"/>
+			<column name="date" value="2018-07-19"/>
+			<column name="number_of_rate" value="1"/>
+			<column name="deleted" valueBoolean="false"/>
+		</insert>
+		
+		<insert tableName="document">
+			<column name="subject_id" value="1"/>
+			<column name="user_id" value="1"/>
+			<column name="name" value="Skill CASIO Tich Phan + Đề trắc nghiệm số 1"/>
+			<column name="description" value="Tổng hơp các kĩ năng casio và đề thi thử trắc nghiệm môn toán"/>
+			<column name="number_of_download" value="8"/>
+			<column name="image" value="image=SkillCasio.png"/>
+			<column name="rate" value="2.59"/>
+			<column name="link_document" value="Skill CASIO Tich Phan + Đề trắc nghiệm số 1.pdf"/>
+			<column name="date" value="2018-07-19"/>
+			<column name="number_of_rate" value="12"/>
+			<column name="deleted" valueBoolean="false"/>
+		</insert>
+		
+		<insert tableName="document">
+			<column name="subject_id" value="1"/>
+			<column name="user_id" value="1"/>
+			<column name="name" value="Sự đồng biến nghịch biến của hàm số"/>
+			<column name="description" value="Bài tập về sự đồng biến nghịch biến"/>
+			<column name="number_of_download" value="0"/>
+			<column name="image" value="image=976_1490004621.jpg"/>
+			<column name="rate" value="0"/>
+			<column name="link_document" value="Skill CASIO Tich Phan + Đề trắc nghiệm số 1.pdf"/>
+			<column name="date" value="2018-07-19"/>
+			<column name="number_of_rate" value="5"/>
+			<column name="deleted" valueBoolean="false"/>
+		</insert>
+		
+		<insert tableName="document">
+			<column name="subject_id" value="1"/>
+			<column name="user_id" value="1"/>
+			<column name="name" value="Skill CASIO Tich Phan + Đề trắc nghiệm số 1"/>
+			<column name="description" value="Tổng hơp các kĩ năng casio và đề thi thử trắc nghiệm môn toán"/>
+			<column name="number_of_download" value="8"/>
+			<column name="image" value="image=SkillCasio.png"/>
+			<column name="rate" value="2.59"/>
+			<column name="link_document" value="Skill CASIO Tich Phan + Đề trắc nghiệm số 1.pdf"/>
+			<column name="date" value="2018-07-19"/>
+			<column name="number_of_rate" value="12"/>
+			<column name="deleted" valueBoolean="false"/>
+		</insert>
+		
+		<insert tableName="document">
+			<column name="subject_id" value="3"/>
+			<column name="user_id" value="2"/>
+			<column name="name" value="Bí kíp BI KIP 7 IN 1 FULL"/>
+			<column name="description" value="Tất cả các dạng bài tập(đã phân dạng dễ hiểu nhất) phủ kín đề thi đại học các\r\nnăm + Các ví dụ - giải chi tiết bằng các đơn giản nhất tương ứng các dạng.\r\n+ Tất cả bản chất lí thuyết\r\n+ Các phương pháp máy tính bổ trợ làm bài trắc nghiệm nhanh nhất\r\n+ Vấn đề thực hành – thí nghiệm – đồ thị\r\n+ Xu thế ra đề Quốc Gia 2015\r\n+ Rèn luyện – áp dụng giải đề Đại Học các năm trước tương ứng.\r\n+ Cách nhớ lí thuyết"/>
+			<column name="number_of_download" value="8"/>
+			<column name="image" value="image=7in1.png"/>
+			<column name="rate" value="2.59"/>
+			<column name="link_document" value="BI-KIP-7-IN-1-FULL.pdf"/>
+			<column name="date" value="2018-07-19"/>
+			<column name="number_of_rate" value="12"/>
+			<column name="deleted" valueBoolean="false"/>
+		</insert>
+		
+		
+	</changeSet>
+</databaseChangeLog>

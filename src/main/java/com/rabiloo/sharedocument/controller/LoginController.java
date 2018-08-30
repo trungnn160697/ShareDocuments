@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -40,11 +41,12 @@ public class LoginController {
 	}
 
 	@GetMapping("/")
-	public String manager(Model model) {
+	public String manager(Model model,HttpSession session) {
 		model.addAttribute("totalUser", userService.countByDeleted(false));
 		model.addAttribute("totalDocument", documentService.countAll());
 		model.addAttribute("numberOfDownload", documentService.coutnNumberOfDownload());
 		model.addAttribute("totalExam", examService.countAll());
+		session.setAttribute("active_menu",0);
 		return "manager/index";
 	}
 
@@ -65,6 +67,33 @@ public class LoginController {
 	@GetMapping("/display")
 	public void displayImage(HttpServletResponse response, @RequestParam("image") String name) {
 		File file = new File(Constants.URL_IMAGE_USER + name);
+		response.setContentType("image/*");
+		response.setHeader("Content-Disposition", "attachment;filename=" + file.getName());
+		BufferedInputStream inStrem;
+		try {
+			inStrem = new BufferedInputStream(new FileInputStream(file));
+			BufferedOutputStream outStream = new BufferedOutputStream(response.getOutputStream());
+
+			byte[] buffer = new byte[1024];
+			int bytesRead = 0;
+			while ((bytesRead = inStrem.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+			outStream.flush();
+			inStrem.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	@GetMapping("/display-document")
+	public void displayImageDocument(HttpServletResponse response, @RequestParam("image") String name) {
+		File file = new File(Constants.URL_IMAGE_DOCUMENT + name);
 		response.setContentType("image/*");
 		response.setHeader("Content-Disposition", "attachment;filename=" + file.getName());
 		BufferedInputStream inStrem;

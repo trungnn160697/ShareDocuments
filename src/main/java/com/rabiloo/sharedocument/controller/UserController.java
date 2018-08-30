@@ -10,11 +10,13 @@ public class UserController {
 
 	@GetMapping("/info-user")
 	public String userInfo(HttpSession session) {
+		session.setAttribute("active_menu",1);
 		return "manager/info-user";
 	}
 
 	@GetMapping("/user")
-	public String user() {
+	public String user(HttpSession session) {
+		session.setAttribute("active_menu",2);
 		return "manager/user";
 	}
 }
